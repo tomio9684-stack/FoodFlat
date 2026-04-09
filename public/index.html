@@ -5,285 +5,242 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FoodFlat – Order Food</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --primary: #C84B11;
-  --primary-light: #E8652A;
-  --brown: #3B1F0E;
-  --brown-mid: #5C3317;
-  --cream: #FDF6EE;
-  --cream-dark: #F0E4D4;
-  --text: #1A0A00;
-  --text-mid: #5A3A20;
-  --text-muted: #9A7A60;
-  --white: #fff;
-  --shadow: 0 4px 20px rgba(58,31,14,0.12);
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--text); max-width:420px; margin:0 auto; min-height:100vh; }
+:root{--primary:#C84B11;--pl:#E8652A;--glow:rgba(200,75,17,0.22);--brown:#2C1508;--bm:#4A2010;--bl:#6B3520;--cream:#FDF6EE;--cd:#F0E4D4;--cm:#E8D5BE;--text:#1A0A00;--tm:#5A3A20;--mu:#9A7A60;--white:#fff;--ss:0 2px 8px rgba(44,21,8,0.08);--s:0 4px 24px rgba(44,21,8,0.13);--sl:0 8px 40px rgba(44,21,8,0.18);}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);max-width:430px;margin:0 auto;min-height:100vh;}
+.topbar{background:var(--brown);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,0.35);}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-icon{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--pl));display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 3px 14px var(--glow);}
+.logo-text .name{font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:var(--white);letter-spacing:-0.5px;}
+.logo-text .tag{font-size:10px;color:rgba(255,255,255,0.4);}
+.nav-pills{display:flex;gap:6px;}
+.np{color:rgba(255,255,255,0.6);font-size:11px;font-weight:600;text-decoration:none;padding:6px 11px;border-radius:20px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);transition:all 0.2s;}
+.np:hover{background:rgba(255,255,255,0.12);color:white;}
 
-/* TOPBAR */
-.topbar { background:var(–brown); padding:16px 20px; display:flex; justify-content:space-between; align-items:center; }
-.logo { display:flex; align-items:center; gap:10px; }
-.logo-icon { width:38px; height:38px; border-radius:50%; background:var(–primary); display:flex; align-items:center; justify-content:center; font-size:18px; }
-.logo-text .name { font-family:‘Playfair Display’,serif; font-size:18px; color:var(–white); font-weight:800; }
-.logo-text .tag { font-size:10px; color:rgba(255,255,255,0.5); }
-.nav-links { display:flex; gap:8px; }
-.nav-link { color:rgba(255,255,255,0.7); font-size:12px; font-weight:600; text-decoration:none; padding:6px 12px; border-radius:20px; border:1px solid rgba(255,255,255,0.2); transition:all 0.2s; }
-.nav-link:hover { background:rgba(255,255,255,0.1); color:white; }
+.hero{background:linear-gradient(175deg,var(–brown) 0%,var(–bm) 55%,var(–bl) 100%);padding:28px 22px 68px;position:relative;overflow:hidden;}
+.hero::before{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(200,75,17,0.2) 0%,transparent 70%);}
+.hero::after{content:‘🍛’;position:absolute;right:-8px;bottom:-12px;font-size:130px;opacity:0.1;}
+.hero-loc{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:5px 12px;font-size:11px;color:rgba(255,255,255,0.7);margin-bottom:14px;}
+.hero-loc span{color:var(–pl);font-weight:600;}
+.hero h1{font-family:‘Playfair Display’,serif;font-size:28px;font-weight:800;color:var(–white);line-height:1.2;margin-bottom:4px;}
+.hero h1 em{font-style:italic;color:var(–pl);}
+.hero-sub{color:rgba(255,255,255,0.5);font-size:13px;margin-bottom:20px;}
+.search-bar{display:flex;align-items:center;background:var(–white);border-radius:14px;padding:5px 5px 5px 16px;box-shadow:var(–sl);}
+.search-bar input{flex:1;border:none;outline:none;font-family:‘DM Sans’,sans-serif;font-size:14px;color:var(–text);background:transparent;}
+.search-bar input::placeholder{color:var(–mu);}
+.search-bar button{background:linear-gradient(135deg,var(–primary),var(–pl));border:none;cursor:pointer;width:38px;height:38px;border-radius:10px;color:white;font-size:16px;}
 
-/* HERO */
-.hero { background:linear-gradient(160deg, var(–brown) 0%, var(–brown-mid) 100%); padding:32px 20px 80px; position:relative; overflow:hidden; }
-.hero::after { content:‘🍛’; position:absolute; right:-10px; bottom:-10px; font-size:120px; opacity:0.12; }
-.hero h1 { font-family:‘Playfair Display’,serif; font-size:28px; color:var(–white); line-height:1.25; margin-bottom:6px; }
-.hero p { color:rgba(255,255,255,0.6); font-size:13px; margin-bottom:24px; }
-.hero-search { display:flex; gap:8px; align-items:center; background:var(–white); border-radius:12px; padding:4px 4px 4px 14px; }
-.hero-search input { flex:1; border:none; outline:none; font-family:‘DM Sans’,sans-serif; font-size:14px; color:var(–text); background:transparent; }
-.hero-search input::placeholder { color:var(–text-muted); }
-.hero-search button { background:var(–primary); border:none; cursor:pointer; width:36px; height:36px; border-radius:10px; color:white; font-size:16px; }
+.content{margin-top:-40px;padding:0 16px 100px;position:relative;z-index:1;}
 
-/* CONTENT */
-.content { margin-top:-44px; padding:0 16px 100px; }
+.promo{background:linear-gradient(120deg,#9B3510 0%,var(–primary) 50%,var(–pl) 100%);border-radius:20px;padding:20px;margin-bottom:4px;position:relative;overflow:hidden;box-shadow:0 6px 24px var(–glow);}
+.promo::after{content:‘🎉’;position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:48px;opacity:0.25;}
+.promo-tag{display:inline-block;background:rgba(255,255,255,0.2);color:white;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:8px;}
+.promo h3{font-family:‘Playfair Display’,serif;font-size:18px;color:white;margin-bottom:4px;}
+.promo p{font-size:12px;color:rgba(255,255,255,0.8);margin-bottom:12px;}
+.promo-btn{display:inline-block;background:white;color:var(–primary);font-size:12px;font-weight:700;padding:8px 18px;border-radius:20px;border:none;cursor:pointer;font-family:‘DM Sans’,sans-serif;}
 
-.section-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
-.section-head h2 { font-size:16px; font-weight:700; }
-.badge-btn { background:var(–primary); color:white; border:none; cursor:pointer; font-family:‘DM Sans’,sans-serif; font-size:11px; font-weight:600; padding:5px 12px; border-radius:20px; }
+.sec-head{display:flex;justify-content:space-between;align-items:center;margin:22px 0 14px;}
+.sec-head h2{font-family:‘Playfair Display’,serif;font-size:18px;color:var(–brown);}
+.sec-head span{font-size:12px;color:var(–primary);font-weight:600;}
 
-/* FOOD CARDS */
-.food-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:28px; }
-.food-card { background:var(–white); border-radius:16px; overflow:hidden; box-shadow:var(–shadow); cursor:pointer; transition:transform 0.2s; }
-.food-card:hover { transform:translateY(-3px); }
-.food-card-img { height:90px; background:linear-gradient(135deg,var(–cream-dark),var(–cream)); display:flex; align-items:center; justify-content:center; font-size:48px; }
-.food-card-body { padding:10px 12px; }
-.food-card-name { font-size:13px; font-weight:700; margin-bottom:2px; }
-.food-card-price { font-size:12px; color:var(–text-muted); margin-bottom:8px; }
-.food-card-btn { width:100%; background:var(–primary); color:white; border:none; cursor:pointer; font-family:‘DM Sans’,sans-serif; font-size:13px; font-weight:600; padding:8px; border-radius:10px; transition:background 0.2s; }
-.food-card-btn:hover { background:var(–primary-light); }
+.food-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.food-card{background:var(–white);border-radius:18px;overflow:hidden;box-shadow:var(–s);cursor:pointer;transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s;border:2px solid transparent;}
+.food-card:active{transform:scale(0.97);}
+.food-card.sel{border-color:var(–primary);box-shadow:0 4px 24px var(–glow);}
+.fci{height:88px;background:linear-gradient(135deg,var(–cd),var(–cm));display:flex;align-items:center;justify-content:center;font-size:46px;position:relative;}
+.fcb-tag{position:absolute;top:7px;right:7px;background:var(–primary);color:white;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;}
+.fcb{padding:10px 12px 12px;}
+.fcb-name{font-size:13px;font-weight:700;color:var(–text);margin-bottom:2px;}
+.fcb-price{font-size:14px;font-weight:700;color:var(–primary);margin-bottom:8px;}
+.fcb-btn{width:100%;background:linear-gradient(135deg,var(–primary),var(–pl));color:white;border:none;cursor:pointer;font-family:‘DM Sans’,sans-serif;font-size:12px;font-weight:700;padding:8px;border-radius:10px;}
 
-/* ORDER FORM */
-.order-form { background:var(–white); border-radius:20px; padding:20px; box-shadow:var(–shadow); margin-bottom:20px; }
-.order-form h3 { font-family:‘Playfair Display’,serif; font-size:18px; margin-bottom:16px; }
-.form-group { margin-bottom:14px; }
-.form-label { font-size:11px; color:var(–text-muted); text-transform:uppercase; letter-spacing:0.5px; font-weight:600; margin-bottom:6px; display:block; }
-.form-input, .form-select { width:100%; background:var(–cream); border:1px solid var(–cream-dark); border-radius:12px; padding:12px 14px; color:var(–text); font-family:‘DM Sans’,sans-serif; font-size:15px; outline:none; transition:border-color 0.2s; appearance:none; }
-.form-input:focus, .form-select:focus { border-color:var(–primary); }
-.form-input::placeholder { color:var(–text-muted); }
-.submit-btn { width:100%; background:var(–primary); color:white; border:none; cursor:pointer; font-family:‘DM Sans’,sans-serif; font-size:16px; font-weight:700; padding:16px; border-radius:14px; margin-top:4px; transition:background 0.2s, transform 0.1s; box-shadow:0 6px 20px rgba(200,75,17,0.3); }
-.submit-btn:hover { background:var(–primary-light); }
-.submit-btn:active { transform:scale(0.98); }
+.order-form{background:var(–white);border-radius:22px;padding:22px;box-shadow:var(–s);margin-top:22px;border:1.5px solid var(–cd);}
+.form-title{font-family:‘Playfair Display’,serif;font-size:20px;color:var(–brown);margin-bottom:4px;}
+.form-sub{font-size:12px;color:var(–mu);margin-bottom:18px;}
+.fg{margin-bottom:14px;}
+.fl{font-size:11px;color:var(–mu);text-transform:uppercase;letter-spacing:0.6px;font-weight:700;margin-bottom:6px;display:block;}
+.fi{width:100%;background:var(–cream);border:1.5px solid var(–cd);border-radius:12px;padding:13px 14px;color:var(–text);font-family:‘DM Sans’,sans-serif;font-size:14px;outline:none;transition:border-color 0.2s,box-shadow 0.2s;}
+.fi:focus{border-color:var(–primary);box-shadow:0 0 0 3px var(–glow);}
+.fi::placeholder{color:var(–mu);}
+.sub-btn{width:100%;background:linear-gradient(135deg,var(–brown) 0%,var(–primary) 60%,var(–pl) 100%);color:white;border:none;cursor:pointer;font-family:‘DM Sans’,sans-serif;font-size:16px;font-weight:700;padding:16px;border-radius:14px;margin-top:4px;box-shadow:0 6px 24px var(–glow);transition:opacity 0.2s,transform 0.1s;}
+.sub-btn:active{transform:scale(0.98);opacity:0.9;}
 
-/* MY ORDERS */
-.my-orders { background:var(–white); border-radius:20px; padding:20px; box-shadow:var(–shadow); }
-.my-orders h3 { font-family:‘Playfair Display’,serif; font-size:18px; margin-bottom:16px; }
-.order-item { background:var(–cream); border-radius:14px; padding:14px; margin-bottom:10px; border-left:4px solid var(–primary); }
-.order-item-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px; }
-.order-food { font-size:14px; font-weight:700; }
-.order-fee { font-size:13px; color:var(–primary); font-weight:700; }
-.order-address { font-size:12px; color:var(–text-muted); margin-bottom:6px; }
-.order-status { display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px; }
-.status-pending { background:rgba(200,75,17,0.1); color:var(–primary); }
-.status-ready { background:rgba(34,197,94,0.1); color:#15803d; }
-.status-assigned { background:rgba(59,130,246,0.1); color:#1d4ed8; }
-.status-delivered { background:rgba(100,100,100,0.1); color:#555; }
-.order-rider { font-size:12px; color:var(–text-mid); margin-top:4px; }
-.empty-msg { text-align:center; padding:24px; color:var(–text-muted); font-size:14px; }
+.my-orders{background:var(–white);border-radius:22px;padding:22px;box-shadow:var(–s);margin-top:22px;border:1.5px solid var(–cd);}
+.mo-title{font-family:‘Playfair Display’,serif;font-size:20px;color:var(–brown);margin-bottom:16px;}
+.oc{background:var(–cream);border-radius:16px;padding:16px;margin-bottom:12px;border-left:4px solid var(–primary);box-shadow:var(–ss);}
+.oc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;gap:8px;}
+.oc-name{font-size:15px;font-weight:700;color:var(–text);}
+.chip{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+.sp{background:rgba(200,75,17,0.12);color:var(–primary);}
+.sr{background:rgba(34,197,94,0.12);color:#15803d;}
+.sa{background:rgba(59,130,246,0.12);color:#1d4ed8;}
+.sd{background:rgba(80,80,80,0.1);color:#555;}
+.oc-addr{font-size:12px;color:var(–mu);margin-bottom:4px;}
+.oc-rider{font-size:12px;color:var(–tm);margin-bottom:10px;}
+.breakdown{background:white;border-radius:12px;padding:12px;}
+.br-row{display:flex;justify-content:space-between;font-size:13px;color:var(–tm);margin-bottom:4px;}
+.br-total{display:flex;justify-content:space-between;font-size:15px;font-weight:800;border-top:1.5px solid var(–cd);padding-top:8px;margin-top:4px;}
+.br-amt{color:var(–primary);font-family:‘Playfair Display’,serif;}
+.empty-msg{text-align:center;padding:28px;color:var(–mu);font-size:14px;line-height:2;}
 
-/* BOTTOM NAV */
-.bottom-nav { position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:420px; background:var(–white); border-top:1px solid var(–cream-dark); display:flex; justify-content:space-around; padding:10px 0 20px; z-index:100; box-shadow:0 -4px 20px rgba(58,31,14,0.08); }
-.nav-item { display:flex; flex-direction:column; align-items:center; gap:3px; cursor:pointer; font-size:10px; font-weight:600; color:var(–text-muted); text-decoration:none; transition:color 0.2s; }
-.nav-item.active { color:var(–primary); }
-.nav-icon { font-size:22px; }
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:var(–white);border-top:1.5px solid var(–cd);display:flex;justify-content:space-around;padding:10px 0 22px;z-index:100;box-shadow:0 -4px 24px rgba(44,21,8,0.1);}
+.ni{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;font-weight:600;color:var(–mu);text-decoration:none;transition:color 0.2s;}
+.ni.active{color:var(–primary);}
+.niw{width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;transition:background 0.2s;}
+.ni.active .niw{background:rgba(200,75,17,0.1);}
 
-/* TOAST */
-.toast { position:fixed; top:20px; left:50%; transform:translateX(-50%) translateY(-80px); background:#2E7D32; color:white; padding:12px 22px; border-radius:50px; font-size:14px; font-weight:600; z-index:500; transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1); white-space:nowrap; }
-.toast.show { transform:translateX(-50%) translateY(0); }
-.toast.err { background:var(–primary); }
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-90px);background:var(–brown);color:white;padding:12px 22px;border-radius:50px;font-size:13px;font-weight:600;z-index:500;transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);white-space:nowrap;box-shadow:var(–sl);}
+.toast.show{transform:translateX(-50%) translateY(0);}
+.toast.err{background:var(–primary);}
+.toast.ok{background:#15803d;}
 </style>
 
 </head>
 <body>
 
 <div class="topbar">
-  <div class="logo">
+  <a class="logo" href="index.html">
     <div class="logo-icon">🍛</div>
     <div class="logo-text"><div class="name">FoodFlat</div><div class="tag">...Select and Eat</div></div>
-  </div>
-  <div class="nav-links">
-    <a class="nav-link" href="vendor.html">Vendor</a>
-    <a class="nav-link" href="rider.html">Rider</a>
-    <a class="nav-link" href="admin.html">Admin</a>
+  </a>
+  <div class="nav-pills">
+    <a class="np" href="vendor.html">Vendor</a>
+    <a class="np" href="rider.html">Rider</a>
+    <a class="np" href="admin.html">Admin</a>
   </div>
 </div>
 
 <div class="hero">
-  <h1>Your Favorite Food<br>Delivered Fast</h1>
-  <p>📍 Delivering to: Kola, Lagos</p>
-  <div class="hero-search">
-    <input type="text" placeholder="Search for food....">
+  <div class="hero-loc">📍 Delivering to <span>Kola, Lagos</span></div>
+  <h1>Your Favorite Food<br><em>Delivered Fast</em></h1>
+  <p class="hero-sub">Order from the best spots around you</p>
+  <div class="search-bar">
+    <input type="text" placeholder="Search for food or restaurants...">
     <button>🔍</button>
   </div>
 </div>
 
 <div class="content">
-  <div class="section-head"><h2>What would you like?</h2></div>
+  <div class="promo">
+    <div class="promo-tag">🔥 Limited Offer</div>
+    <h3>20% Off Your First Order!</h3>
+    <p>Use code <strong>FLATFOOD</strong> at checkout</p>
+    <button class="promo-btn">Claim Now →</button>
+  </div>
 
+  <div class="sec-head"><h2>What would you like?</h2><span>6 items</span></div>
   <div class="food-grid">
-    <div class="food-card" onclick="selectFood('Amala & Ewedu', 1500)">
-      <div class="food-card-img">🍲</div>
-      <div class="food-card-body">
-        <div class="food-card-name">Amala & Ewedu</div>
-        <div class="food-card-price">₦1,500</div>
-        <button class="food-card-btn">Order Now</button>
-      </div>
+    <div class="food-card" onclick="selectFood(this,'Amala & Ewedu',1500)">
+      <div class="fci">🍲<span class="fcb-tag">Popular</span></div>
+      <div class="fcb"><div class="fcb-name">Amala & Ewedu</div><div class="fcb-price">₦1,500</div><button class="fcb-btn">Order Now</button></div>
     </div>
-    <div class="food-card" onclick="selectFood('Jollof Rice & Chicken', 2500)">
-      <div class="food-card-img">🍚</div>
-      <div class="food-card-body">
-        <div class="food-card-name">Jollof Rice & Chicken</div>
-        <div class="food-card-price">₦2,500</div>
-        <button class="food-card-btn">Order Now</button>
-      </div>
+    <div class="food-card" onclick="selectFood(this,'Jollof Rice & Chicken',2500)">
+      <div class="fci">🍚<span class="fcb-tag">🔥 Hot</span></div>
+      <div class="fcb"><div class="fcb-name">Jollof Rice & Chicken</div><div class="fcb-price">₦2,500</div><button class="fcb-btn">Order Now</button></div>
     </div>
-    <div class="food-card" onclick="selectFood('Chicken Shawarma', 2000)">
-      <div class="food-card-img">🌯</div>
-      <div class="food-card-body">
-        <div class="food-card-name">Chicken Shawarma</div>
-        <div class="food-card-price">₦2,000</div>
-        <button class="food-card-btn">Order Now</button>
-      </div>
+    <div class="food-card" onclick="selectFood(this,'Chicken Shawarma',2000)">
+      <div class="fci">🌯</div>
+      <div class="fcb"><div class="fcb-name">Chicken Shawarma</div><div class="fcb-price">₦2,000</div><button class="fcb-btn">Order Now</button></div>
     </div>
-    <div class="food-card" onclick="selectFood('Pepper Soup', 1800)">
-      <div class="food-card-img">🍜</div>
-      <div class="food-card-body">
-        <div class="food-card-name">Pepper Soup</div>
-        <div class="food-card-price">₦1,800</div>
-        <button class="food-card-btn">Order Now</button>
-      </div>
+    <div class="food-card" onclick="selectFood(this,'Pepper Soup',1800)">
+      <div class="fci">🍜</div>
+      <div class="fcb"><div class="fcb-name">Pepper Soup</div><div class="fcb-price">₦1,800</div><button class="fcb-btn">Order Now</button></div>
     </div>
-    <div class="food-card" onclick="selectFood('Grilled Chicken & Chips', 2800)">
-      <div class="food-card-img">🍗</div>
-      <div class="food-card-body">
-        <div class="food-card-name">Grilled Chicken & Chips</div>
-        <div class="food-card-price">₦2,800</div>
-        <button class="food-card-btn">Order Now</button>
-      </div>
+    <div class="food-card" onclick="selectFood(this,'Grilled Chicken & Chips',2800)">
+      <div class="fci">🍗</div>
+      <div class="fcb"><div class="fcb-name">Grilled Chicken & Chips</div><div class="fcb-price">₦2,800</div><button class="fcb-btn">Order Now</button></div>
     </div>
-    <div class="food-card" onclick="selectFood('Suya & Bread', 1200)">
-      <div class="food-card-img">🍢</div>
-      <div class="food-card-body">
-        <div class="food-card-name">Suya & Bread</div>
-        <div class="food-card-price">₦1,200</div>
-        <button class="food-card-btn">Order Now</button>
-      </div>
+    <div class="food-card" onclick="selectFood(this,'Suya & Bread',1200)">
+      <div class="fci">🍢</div>
+      <div class="fcb"><div class="fcb-name">Suya & Bread</div><div class="fcb-price">₦1,200</div><button class="fcb-btn">Order Now</button></div>
     </div>
   </div>
 
   <div class="order-form">
-    <h3>Place Your Order</h3>
-    <div class="form-group">
-      <label class="form-label">Selected Food</label>
-      <input class="form-input" id="foodInput" placeholder="Tap a food card above or type here…" type="text">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Delivery Address</label>
-      <input class="form-input" id="addressInput" placeholder="e.g. 12 Kola Street, Lagos" type="text">
-    </div>
-    <button class="submit-btn" onclick="placeOrder()">🛒 Place Order</button>
+    <div class="form-title">Place Your Order</div>
+    <div class="form-sub">Tap a food card above then fill in your address</div>
+    <div class="fg"><label class="fl">Selected Food</label><input class="fi" id="foodInput" placeholder="Tap a food card above…" type="text" readonly></div>
+    <div class="fg"><label class="fl">Delivery Address</label><input class="fi" id="addressInput" placeholder="e.g. 12 Kola Street, Lagos" type="text"></div>
+    <button class="sub-btn" onclick="placeOrder()">🛒 &nbsp;Place Order</button>
   </div>
 
   <div class="my-orders">
-    <h3>My Orders</h3>
-    <div id="myOrders"><div class="empty-msg">No orders yet. Place one above!</div></div>
+    <div class="mo-title">My Orders</div>
+    <div id="myOrders"><div class="empty-msg">🍽️<br>No orders yet.<br>Pick something above!</div></div>
   </div>
 </div>
 
 <nav class="bottom-nav">
-  <a class="nav-item active" href="index.html"><span class="nav-icon">🏠</span><span>Home</span></a>
-  <a class="nav-item" href="#" onclick="loadOrders()"><span class="nav-icon">📋</span><span>Orders</span></a>
-  <a class="nav-item" href="vendor.html"><span class="nav-icon">🏪</span><span>Vendor</span></a>
-  <a class="nav-item" href="rider.html"><span class="nav-icon">🛵</span><span>Rider</span></a>
+  <a class="ni active" href="index.html"><div class="niw">🏠</div><span>Home</span></a>
+  <a class="ni" href="#" onclick="loadOrders()"><div class="niw">📋</div><span>Orders</span></a>
+  <a class="ni" href="vendor.html"><div class="niw">🏪</div><span>Vendor</span></a>
+  <a class="ni" href="rider.html"><div class="niw">🛵</div><span>Rider</span></a>
 </nav>
-
 <div class="toast" id="toast"></div>
 
 <script>
-let myOrderIds = JSON.parse(localStorage.getItem('myOrderIds') || '[]');
+let myOrderIds=JSON.parse(localStorage.getItem('myOrderIds')||'[]');
+let selPrice=0;
 
-function selectFood(name, price) {
-  document.getElementById('foodInput').value = name;
+function selectFood(card,name,price){
+  document.querySelectorAll('.food-card').forEach(c=>c.classList.remove('sel'));
+  card.classList.add('sel');
+  document.getElementById('foodInput').value=name;
+  selPrice=price;
   document.getElementById('addressInput').focus();
-  showToast('Selected: ' + name);
+  showToast('Selected: '+name+' — ₦'+price.toLocaleString());
 }
 
-function placeOrder() {
-  const food = document.getElementById('foodInput').value.trim();
-  const address = document.getElementById('addressInput').value.trim();
-  if (!food) { showToast('Please select or enter a food item', true); return; }
-  if (!address) { showToast('Please enter your delivery address', true); return; }
-
-  fetch('/order', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ food, address })
-  })
-  .then(res => res.json())
-  .then(data => {
+function placeOrder(){
+  const food=document.getElementById('foodInput').value.trim();
+  const address=document.getElementById('addressInput').value.trim();
+  if(!food){showToast('Please select a food item first',true);return;}
+  if(!address){showToast('Please enter your delivery address',true);return;}
+  fetch('/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({food,address,foodPrice:selPrice})})
+  .then(r=>r.json()).then(data=>{
     myOrderIds.push(data.id);
-    localStorage.setItem('myOrderIds', JSON.stringify(myOrderIds));
-    document.getElementById('foodInput').value = '';
-    document.getElementById('addressInput').value = '';
-    showToast('Order placed! Delivery fee ₦' + data.deliveryFee);
+    localStorage.setItem('myOrderIds',JSON.stringify(myOrderIds));
+    document.getElementById('foodInput').value='';
+    document.getElementById('addressInput').value='';
+    document.querySelectorAll('.food-card').forEach(c=>c.classList.remove('sel'));
+    selPrice=0;
+    showToast('Order placed! Total ₦'+data.total.toLocaleString(),false,true);
     loadOrders();
-  })
-  .catch(() => showToast('Could not connect to server', true));
+  }).catch(()=>showToast('Could not connect to server',true));
 }
 
-function loadOrders() {
-  fetch('/orders')
-    .then(res => res.json())
-    .then(data => {
-      const mine = data.filter(o => myOrderIds.includes(o.id));
-      const container = document.getElementById('myOrders');
-      if (mine.length === 0) { container.innerHTML = '<div class="empty-msg">No orders yet. Place one above!</div>'; return; }
-      container.innerHTML = mine.reverse().map(o => `
-        <div class="order-item">
-          <div class="order-item-top">
-            <div class="order-food">${o.food}</div>
-            <div class="order-fee">₦${o.deliveryFee} delivery</div>
-          </div>
-          <div class="order-address">📍 ${o.address}</div>
-          <span class="order-status ${statusClass(o.status)}">${statusIcon(o.status)} ${o.status}</span>
-          <div class="order-rider">🛵 ${o.rider}</div>
-        </div>`).join('');
-    })
-    .catch(() => {});
+function loadOrders(){
+  fetch('/orders').then(r=>r.json()).then(data=>{
+    const mine=data.filter(o=>myOrderIds.includes(o.id));
+    const el=document.getElementById('myOrders');
+    if(!mine.length){el.innerHTML='<div class="empty-msg">🍽️<br>No orders yet.<br>Pick something above!</div>';return;}
+    el.innerHTML=mine.slice().reverse().map(o=>`
+      <div class="oc">
+        <div class="oc-top"><div class="oc-name">${o.food}</div><span class="chip ${sc(o.status)}">${si(o.status)} ${o.status}</span></div>
+        <div class="oc-addr">📍 ${o.address}</div>
+        <div class="oc-rider">🛵 ${o.rider}</div>
+        <div class="breakdown">
+          <div class="br-row"><span>Food</span><span>₦${(o.foodPrice||0).toLocaleString()}</span></div>
+          <div class="br-row"><span>Delivery fee</span><span>₦${(o.deliveryFee||0).toLocaleString()}</span></div>
+          <div class="br-total"><span>Total</span><span class="br-amt">₦${(o.total||0).toLocaleString()}</span></div>
+        </div>
+      </div>`).join('');
+  }).catch(()=>{});
 }
 
-function statusClass(s) {
-  if (s === 'pending') return 'status-pending';
-  if (s === 'ready') return 'status-ready';
-  if (s === 'rider assigned') return 'status-assigned';
-  if (s === 'delivered') return 'status-delivered';
-  return 'status-pending';
-}
-function statusIcon(s) {
-  if (s === 'pending') return '⏳';
-  if (s === 'ready') return '✅';
-  if (s === 'rider assigned') return '🛵';
-  if (s === 'delivered') return '🎉';
-  return '⏳';
-}
+function sc(s){return s==='pending'?'sp':s==='ready'?'sr':s==='rider assigned'?'sa':'sd';}
+function si(s){return s==='pending'?'⏳':s==='ready'?'✅':s==='rider assigned'?'🛵':'🎉';}
 
-function showToast(msg, err=false) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.className = 'toast' + (err ? ' err' : '');
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
+function showToast(msg,err=false,ok=false){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className='toast'+(err?' err':ok?' ok':'');
+  t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);
 }
 
 loadOrders();
-setInterval(loadOrders, 5000);
+setInterval(loadOrders,5000);
 </script>
 
 </body>
