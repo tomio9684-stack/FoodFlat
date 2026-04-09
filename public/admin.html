@@ -4,244 +4,243 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FoodFlat – Admin Panel</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>FoodFlat – Order Food</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --primary: #C84B11; --primary-light: #E8652A;
-  --brown: #3B1F0E; --brown-mid: #5C3317;
-  --cream: #FDF6EE; --cream-dark: #F0E4D4;
-  --text: #1A0A00; --text-mid: #5A3A20; --text-muted: #9A7A60;
-  --white: #fff; --shadow: 0 4px 20px rgba(58,31,14,0.12);
-  --green: #15803d; --green-bg: rgba(34,197,94,0.1);
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--text); max-width:420px; margin:0 auto; min-height:100vh; }
+:root{--primary:#C84B11;--pl:#E8652A;--glow:rgba(200,75,17,0.22);--brown:#2C1508;--bm:#4A2010;--bl:#6B3520;--cream:#FDF6EE;--cd:#F0E4D4;--cm:#E8D5BE;--text:#1A0A00;--tm:#5A3A20;--mu:#9A7A60;--white:#fff;--ss:0 2px 8px rgba(44,21,8,0.08);--s:0 4px 24px rgba(44,21,8,0.13);--sl:0 8px 40px rgba(44,21,8,0.18);}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);max-width:430px;margin:0 auto;min-height:100vh;}
+.topbar{background:var(--brown);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,0.35);}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-icon{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--pl));display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 3px 14px var(--glow);}
+.logo-text .name{font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:var(--white);letter-spacing:-0.5px;}
+.logo-text .tag{font-size:10px;color:rgba(255,255,255,0.4);}
+.nav-pills{display:flex;gap:6px;}
+.np{color:rgba(255,255,255,0.6);font-size:11px;font-weight:600;text-decoration:none;padding:6px 11px;border-radius:20px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);transition:all 0.2s;}
+.np:hover{background:rgba(255,255,255,0.12);color:white;}
 
-.topbar { background:var(–brown); padding:16px 20px; display:flex; justify-content:space-between; align-items:center; }
-.logo { display:flex; align-items:center; gap:10px; }
-.logo-icon { width:38px; height:38px; border-radius:50%; background:var(–primary); display:flex; align-items:center; justify-content:center; font-size:18px; }
-.logo-text .name { font-family:‘Playfair Display’,serif; font-size:18px; color:var(–white); font-weight:800; }
-.logo-text .tag { font-size:10px; color:rgba(255,255,255,0.5); }
-.nav-links { display:flex; gap:8px; }
-.nav-link { color:rgba(255,255,255,0.7); font-size:12px; font-weight:600; text-decoration:none; padding:6px 12px; border-radius:20px; border:1px solid rgba(255,255,255,0.2); transition:all 0.2s; }
-.nav-link:hover { background:rgba(255,255,255,0.15); color:white; }
+.hero{background:linear-gradient(175deg,var(–brown) 0%,var(–bm) 55%,var(–bl) 100%);padding:28px 22px 68px;position:relative;overflow:hidden;}
+.hero::before{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(200,75,17,0.2) 0%,transparent 70%);}
+.hero::after{content:‘🍛’;position:absolute;right:-8px;bottom:-12px;font-size:130px;opacity:0.1;}
+.hero-loc{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:5px 12px;font-size:11px;color:rgba(255,255,255,0.7);margin-bottom:14px;}
+.hero-loc span{color:var(–pl);font-weight:600;}
+.hero h1{font-family:‘Playfair Display’,serif;font-size:28px;font-weight:800;color:var(–white);line-height:1.2;margin-bottom:4px;}
+.hero h1 em{font-style:italic;color:var(–pl);}
+.hero-sub{color:rgba(255,255,255,0.5);font-size:13px;margin-bottom:20px;}
+.search-bar{display:flex;align-items:center;background:var(–white);border-radius:14px;padding:5px 5px 5px 16px;box-shadow:var(–sl);}
+.search-bar input{flex:1;border:none;outline:none;font-family:‘DM Sans’,sans-serif;font-size:14px;color:var(–text);background:transparent;}
+.search-bar input::placeholder{color:var(–mu);}
+.search-bar button{background:linear-gradient(135deg,var(–primary),var(–pl));border:none;cursor:pointer;width:38px;height:38px;border-radius:10px;color:white;font-size:16px;}
 
-.page-hero { background:linear-gradient(135deg, var(–brown-mid), var(–brown)); padding:24px 20px; }
-.page-hero h1 { font-family:‘Playfair Display’,serif; font-size:24px; color:var(–white); margin-bottom:4px; }
-.page-hero p { font-size:13px; color:rgba(255,255,255,0.6); }
+.content{margin-top:-40px;padding:0 16px 100px;position:relative;z-index:1;}
 
-/* STATS */
-.stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; padding:16px; }
-.stat-card { background:var(–white); border-radius:14px; padding:12px 8px; text-align:center; box-shadow:var(–shadow); }
-.stat-num { font-family:‘Playfair Display’,serif; font-size:20px; color:var(–primary); font-weight:700; }
-.stat-label { font-size:10px; color:var(–text-muted); margin-top:2px; }
+.promo{background:linear-gradient(120deg,#9B3510 0%,var(–primary) 50%,var(–pl) 100%);border-radius:20px;padding:20px;margin-bottom:4px;position:relative;overflow:hidden;box-shadow:0 6px 24px var(–glow);}
+.promo::after{content:‘🎉’;position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:48px;opacity:0.25;}
+.promo-tag{display:inline-block;background:rgba(255,255,255,0.2);color:white;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:8px;}
+.promo h3{font-family:‘Playfair Display’,serif;font-size:18px;color:white;margin-bottom:4px;}
+.promo p{font-size:12px;color:rgba(255,255,255,0.8);margin-bottom:12px;}
+.promo-btn{display:inline-block;background:white;color:var(–primary);font-size:12px;font-weight:700;padding:8px 18px;border-radius:20px;border:none;cursor:pointer;font-family:‘DM Sans’,sans-serif;}
 
-/* DELIVERY FEE */
-.fee-card { background:var(–white); border-radius:18px; padding:18px; margin:0 16px 20px; box-shadow:var(–shadow); }
-.fee-card h3 { font-family:‘Playfair Display’,serif; font-size:16px; margin-bottom:12px; }
-.fee-row { display:flex; gap:10px; align-items:center; }
-.fee-input { flex:1; background:var(–cream); border:1px solid var(–cream-dark); border-radius:12px; padding:12px 14px; font-family:‘DM Sans’,sans-serif; font-size:15px; color:var(–text); outline:none; transition:border-color 0.2s; }
-.fee-input:focus { border-color:var(–primary); }
-.fee-btn { background:var(–primary); color:white; border:none; cursor:pointer; font-family:‘DM Sans’,sans-serif; font-size:14px; font-weight:700; padding:12px 18px; border-radius:12px; transition:background 0.2s; white-space:nowrap; }
-.fee-btn:hover { background:var(–primary-light); }
-.current-fee { font-size:12px; color:var(–text-muted); margin-top:8px; }
-.current-fee span { color:var(–primary); font-weight:700; }
+.sec-head{display:flex;justify-content:space-between;align-items:center;margin:22px 0 14px;}
+.sec-head h2{font-family:‘Playfair Display’,serif;font-size:18px;color:var(–brown);}
+.sec-head span{font-size:12px;color:var(–primary);font-weight:600;}
 
-/* ORDERS */
-.section-title { font-size:16px; font-weight:700; padding:4px 16px 12px; display:flex; justify-content:space-between; align-items:center; }
-.refresh-btn { font-size:12px; color:var(–primary); background:none; border:none; cursor:pointer; font-family:‘DM Sans’,sans-serif; font-weight:600; }
+.food-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.food-card{background:var(–white);border-radius:18px;overflow:hidden;box-shadow:var(–s);cursor:pointer;transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s;border:2px solid transparent;}
+.food-card:active{transform:scale(0.97);}
+.food-card.sel{border-color:var(–primary);box-shadow:0 4px 24px var(–glow);}
+.fci{height:88px;background:linear-gradient(135deg,var(–cd),var(–cm));display:flex;align-items:center;justify-content:center;font-size:46px;position:relative;}
+.fcb-tag{position:absolute;top:7px;right:7px;background:var(–primary);color:white;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;}
+.fcb{padding:10px 12px 12px;}
+.fcb-name{font-size:13px;font-weight:700;color:var(–text);margin-bottom:2px;}
+.fcb-price{font-size:14px;font-weight:700;color:var(–primary);margin-bottom:8px;}
+.fcb-btn{width:100%;background:linear-gradient(135deg,var(–primary),var(–pl));color:white;border:none;cursor:pointer;font-family:‘DM Sans’,sans-serif;font-size:12px;font-weight:700;padding:8px;border-radius:10px;}
 
-.orders-list { padding:0 16px 100px; display:flex; flex-direction:column; gap:12px; }
+.order-form{background:var(–white);border-radius:22px;padding:22px;box-shadow:var(–s);margin-top:22px;border:1.5px solid var(–cd);}
+.form-title{font-family:‘Playfair Display’,serif;font-size:20px;color:var(–brown);margin-bottom:4px;}
+.form-sub{font-size:12px;color:var(–mu);margin-bottom:18px;}
+.fg{margin-bottom:14px;}
+.fl{font-size:11px;color:var(–mu);text-transform:uppercase;letter-spacing:0.6px;font-weight:700;margin-bottom:6px;display:block;}
+.fi{width:100%;background:var(–cream);border:1.5px solid var(–cd);border-radius:12px;padding:13px 14px;color:var(–text);font-family:‘DM Sans’,sans-serif;font-size:14px;outline:none;transition:border-color 0.2s,box-shadow 0.2s;}
+.fi:focus{border-color:var(–primary);box-shadow:0 0 0 3px var(–glow);}
+.fi::placeholder{color:var(–mu);}
+.sub-btn{width:100%;background:linear-gradient(135deg,var(–brown) 0%,var(–primary) 60%,var(–pl) 100%);color:white;border:none;cursor:pointer;font-family:‘DM Sans’,sans-serif;font-size:16px;font-weight:700;padding:16px;border-radius:14px;margin-top:4px;box-shadow:0 6px 24px var(–glow);transition:opacity 0.2s,transform 0.1s;}
+.sub-btn:active{transform:scale(0.98);opacity:0.9;}
 
-.order-card { background:var(–white); border-radius:18px; padding:16px; box-shadow:var(–shadow); animation:fadeIn 0.3s ease both; }
-@keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+.my-orders{background:var(–white);border-radius:22px;padding:22px;box-shadow:var(–s);margin-top:22px;border:1.5px solid var(–cd);}
+.mo-title{font-family:‘Playfair Display’,serif;font-size:20px;color:var(–brown);margin-bottom:16px;}
+.oc{background:var(–cream);border-radius:16px;padding:16px;margin-bottom:12px;border-left:4px solid var(–primary);box-shadow:var(–ss);}
+.oc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;gap:8px;}
+.oc-name{font-size:15px;font-weight:700;color:var(–text);}
+.chip{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+.sp{background:rgba(200,75,17,0.12);color:var(–primary);}
+.sr{background:rgba(34,197,94,0.12);color:#15803d;}
+.sa{background:rgba(59,130,246,0.12);color:#1d4ed8;}
+.sd{background:rgba(80,80,80,0.1);color:#555;}
+.oc-addr{font-size:12px;color:var(–mu);margin-bottom:4px;}
+.oc-rider{font-size:12px;color:var(–tm);margin-bottom:10px;}
+.breakdown{background:white;border-radius:12px;padding:12px;}
+.br-row{display:flex;justify-content:space-between;font-size:13px;color:var(–tm);margin-bottom:4px;}
+.br-total{display:flex;justify-content:space-between;font-size:15px;font-weight:800;border-top:1.5px solid var(–cd);padding-top:8px;margin-top:4px;}
+.br-amt{color:var(–primary);font-family:‘Playfair Display’,serif;}
+.empty-msg{text-align:center;padding:28px;color:var(–mu);font-size:14px;line-height:2;}
 
-.order-card-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px; }
-.order-id { font-size:11px; color:var(–text-muted); font-weight:600; }
-.order-status { font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px; }
-.status-pending { background:rgba(200,75,17,0.1); color:var(–primary); }
-.status-ready { background:var(–green-bg); color:var(–green); }
-.status-assigned { background:rgba(59,130,246,0.1); color:#1d4ed8; }
-.status-delivered { background:rgba(100,100,100,0.1); color:#555; }
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:var(–white);border-top:1.5px solid var(–cd);display:flex;justify-content:space-around;padding:10px 0 22px;z-index:100;box-shadow:0 -4px 24px rgba(44,21,8,0.1);}
+.ni{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;font-weight:600;color:var(–mu);text-decoration:none;transition:color 0.2s;}
+.ni.active{color:var(–primary);}
+.niw{width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;transition:background 0.2s;}
+.ni.active .niw{background:rgba(200,75,17,0.1);}
 
-.order-food { font-size:15px; font-weight:700; margin-bottom:3px; }
-.order-address { font-size:12px; color:var(–text-muted); margin-bottom:3px; }
-.order-fee { font-size:12px; color:var(–primary); font-weight:600; margin-bottom:10px; }
-.order-rider-row { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
-.rider-tag { font-size:12px; color:var(–text-mid); background:var(–cream); padding:4px 10px; border-radius:20px; }
-
-.assign-section { display:flex; gap:8px; }
-.rider-select { flex:1; background:var(–cream); border:1px solid var(–cream-dark); border-radius:10px; padding:10px 12px; font-family:‘DM Sans’,sans-serif; font-size:13px; color:var(–text); outline:none; appearance:none; transition:border-color 0.2s; }
-.rider-select:focus { border-color:var(–primary); }
-.assign-btn { background:var(–primary); color:white; border:none; cursor:pointer; font-family:‘DM Sans’,sans-serif; font-size:13px; font-weight:700; padding:10px 16px; border-radius:10px; transition:background 0.2s; white-space:nowrap; }
-.assign-btn:hover { background:var(–primary-light); }
-.assigned-badge { display:inline-flex; align-items:center; gap:6px; background:var(–green-bg); color:var(–green); font-size:12px; font-weight:700; padding:8px 12px; border-radius:10px; }
-
-.empty-state { text-align:center; padding:60px 20px; color:var(–text-muted); }
-.empty-state .ei { font-size:48px; margin-bottom:12px; }
-.empty-state p { font-size:15px; color:var(–text-mid); }
-
-.bottom-nav { position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:420px; background:var(–white); border-top:1px solid var(–cream-dark); display:flex; justify-content:space-around; padding:10px 0 20px; z-index:100; box-shadow:0 -4px 20px rgba(58,31,14,0.08); }
-.nav-item { display:flex; flex-direction:column; align-items:center; gap:3px; font-size:10px; font-weight:600; color:var(–text-muted); text-decoration:none; transition:color 0.2s; }
-.nav-item.active { color:var(–primary); }
-.nav-icon { font-size:22px; }
-
-.toast { position:fixed; top:20px; left:50%; transform:translateX(-50%) translateY(-80px); background:#2E7D32; color:white; padding:12px 22px; border-radius:50px; font-size:14px; font-weight:600; z-index:500; transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1); white-space:nowrap; }
-.toast.show { transform:translateX(-50%) translateY(0); }
-.toast.err { background:var(–primary); }
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-90px);background:var(–brown);color:white;padding:12px 22px;border-radius:50px;font-size:13px;font-weight:600;z-index:500;transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);white-space:nowrap;box-shadow:var(–sl);}
+.toast.show{transform:translateX(-50%) translateY(0);}
+.toast.err{background:var(–primary);}
+.toast.ok{background:#15803d;}
 </style>
 
 </head>
 <body>
 
 <div class="topbar">
-  <div class="logo">
-    <div class="logo-icon">⚙️</div>
-    <div class="logo-text"><div class="name">FoodFlat</div><div class="tag">Admin Panel</div></div>
+  <a class="logo" href="index.html">
+    <div class="logo-icon">🍛</div>
+    <div class="logo-text"><div class="name">FoodFlat</div><div class="tag">...Select and Eat</div></div>
+  </a>
+  <div class="nav-pills">
+    <a class="np" href="vendor.html">Vendor</a>
+    <a class="np" href="rider.html">Rider</a>
+    <a class="np" href="admin.html">Admin</a>
   </div>
-  <div class="nav-links">
-    <a class="nav-link" href="index.html">Customer</a>
-    <a class="nav-link" href="vendor.html">Vendor</a>
-    <a class="nav-link" href="rider.html">Rider</a>
+</div>
+
+<div class="hero">
+  <div class="hero-loc">📍 Delivering to <span>Kola, Lagos</span></div>
+  <h1>Your Favorite Food<br><em>Delivered Fast</em></h1>
+  <p class="hero-sub">Order from the best spots around you</p>
+  <div class="search-bar">
+    <input type="text" placeholder="Search for food or restaurants...">
+    <button>🔍</button>
   </div>
 </div>
 
-<div class="page-hero">
-  <h1>⚙️ Admin Dashboard</h1>
-  <p>Manage orders, riders and delivery pricing</p>
-</div>
-
-<div class="stats-row">
-  <div class="stat-card"><div class="stat-num" id="sTotal">0</div><div class="stat-label">Total</div></div>
-  <div class="stat-card"><div class="stat-num" id="sPending">0</div><div class="stat-label">Pending</div></div>
-  <div class="stat-card"><div class="stat-num" id="sReady">0</div><div class="stat-label">Ready</div></div>
-  <div class="stat-card"><div class="stat-num" id="sDone">0</div><div class="stat-label">Done</div></div>
-</div>
-
-<!-- DELIVERY FEE -->
-
-<div class="fee-card">
-  <h3>💰 Set Delivery Fee</h3>
-  <div class="fee-row">
-    <input class="fee-input" id="priceInput" type="number" placeholder="e.g. 800">
-    <button class="fee-btn" onclick="setPrice()">Update Fee</button>
+<div class="content">
+  <div class="promo">
+    <div class="promo-tag">🔥 Limited Offer</div>
+    <h3>20% Off Your First Order!</h3>
+    <p>Use code <strong>FLATFOOD</strong> at checkout</p>
+    <button class="promo-btn">Claim Now →</button>
   </div>
-  <div class="current-fee">Current fee: <span id="currentFee">₦800</span></div>
-</div>
 
-<!-- ORDERS -->
+  <div class="sec-head"><h2>What would you like?</h2><span>6 items</span></div>
+  <div class="food-grid">
+    <div class="food-card" onclick="selectFood(this,'Amala & Ewedu',1500)">
+      <div class="fci">🍲<span class="fcb-tag">Popular</span></div>
+      <div class="fcb"><div class="fcb-name">Amala & Ewedu</div><div class="fcb-price">₦1,500</div><button class="fcb-btn">Order Now</button></div>
+    </div>
+    <div class="food-card" onclick="selectFood(this,'Jollof Rice & Chicken',2500)">
+      <div class="fci">🍚<span class="fcb-tag">🔥 Hot</span></div>
+      <div class="fcb"><div class="fcb-name">Jollof Rice & Chicken</div><div class="fcb-price">₦2,500</div><button class="fcb-btn">Order Now</button></div>
+    </div>
+    <div class="food-card" onclick="selectFood(this,'Chicken Shawarma',2000)">
+      <div class="fci">🌯</div>
+      <div class="fcb"><div class="fcb-name">Chicken Shawarma</div><div class="fcb-price">₦2,000</div><button class="fcb-btn">Order Now</button></div>
+    </div>
+    <div class="food-card" onclick="selectFood(this,'Pepper Soup',1800)">
+      <div class="fci">🍜</div>
+      <div class="fcb"><div class="fcb-name">Pepper Soup</div><div class="fcb-price">₦1,800</div><button class="fcb-btn">Order Now</button></div>
+    </div>
+    <div class="food-card" onclick="selectFood(this,'Grilled Chicken & Chips',2800)">
+      <div class="fci">🍗</div>
+      <div class="fcb"><div class="fcb-name">Grilled Chicken & Chips</div><div class="fcb-price">₦2,800</div><button class="fcb-btn">Order Now</button></div>
+    </div>
+    <div class="food-card" onclick="selectFood(this,'Suya & Bread',1200)">
+      <div class="fci">🍢</div>
+      <div class="fcb"><div class="fcb-name">Suya & Bread</div><div class="fcb-price">₦1,200</div><button class="fcb-btn">Order Now</button></div>
+    </div>
+  </div>
 
-<div class="section-title">
-  All Orders
-  <button class="refresh-btn" onclick="load()">↻ Refresh</button>
+  <div class="order-form">
+    <div class="form-title">Place Your Order</div>
+    <div class="form-sub">Tap a food card above then fill in your address</div>
+    <div class="fg"><label class="fl">Selected Food</label><input class="fi" id="foodInput" placeholder="Tap a food card above…" type="text" readonly></div>
+    <div class="fg"><label class="fl">Delivery Address</label><input class="fi" id="addressInput" placeholder="e.g. 12 Kola Street, Lagos" type="text"></div>
+    <button class="sub-btn" onclick="placeOrder()">🛒 &nbsp;Place Order</button>
+  </div>
+
+  <div class="my-orders">
+    <div class="mo-title">My Orders</div>
+    <div id="myOrders"><div class="empty-msg">🍽️<br>No orders yet.<br>Pick something above!</div></div>
+  </div>
 </div>
-<div class="orders-list" id="ordersList"></div>
 
 <nav class="bottom-nav">
-  <a class="nav-item" href="index.html"><span class="nav-icon">🏠</span><span>Home</span></a>
-  <a class="nav-item" href="vendor.html"><span class="nav-icon">🏪</span><span>Vendor</span></a>
-  <a class="nav-item" href="rider.html"><span class="nav-icon">🛵</span><span>Rider</span></a>
-  <a class="nav-item active" href="admin.html"><span class="nav-icon">⚙️</span><span>Admin</span></a>
+  <a class="ni active" href="index.html"><div class="niw">🏠</div><span>Home</span></a>
+  <a class="ni" href="#" onclick="loadOrders()"><div class="niw">📋</div><span>Orders</span></a>
+  <a class="ni" href="vendor.html"><div class="niw">🏪</div><span>Vendor</span></a>
+  <a class="ni" href="rider.html"><div class="niw">🛵</div><span>Rider</span></a>
 </nav>
-
 <div class="toast" id="toast"></div>
 
 <script>
-const RIDERS = ['Rider Michael', 'Rider Chidi', 'Rider Tunde', 'Rider Emeka', 'Rider Fatima'];
+let myOrderIds=JSON.parse(localStorage.getItem('myOrderIds')||'[]');
+let selPrice=0;
 
-function statusClass(s) {
-  if (s === 'pending') return 'status-pending';
-  if (s === 'ready') return 'status-ready';
-  if (s === 'rider assigned') return 'status-assigned';
-  if (s === 'delivered') return 'status-delivered';
-  return 'status-pending';
-}
-function statusIcon(s) {
-  if (s === 'pending') return '⏳';
-  if (s === 'ready') return '✅';
-  if (s === 'rider assigned') return '🛵';
-  if (s === 'delivered') return '🎉';
-  return '⏳';
+function selectFood(card,name,price){
+  document.querySelectorAll('.food-card').forEach(c=>c.classList.remove('sel'));
+  card.classList.add('sel');
+  document.getElementById('foodInput').value=name;
+  selPrice=price;
+  document.getElementById('addressInput').focus();
+  showToast('Selected: '+name+' — ₦'+price.toLocaleString());
 }
 
-function load() {
-  fetch('/orders')
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById('sTotal').textContent = data.length;
-      document.getElementById('sPending').textContent = data.filter(o => o.status === 'pending').length;
-      document.getElementById('sReady').textContent = data.filter(o => o.status === 'ready').length;
-      document.getElementById('sDone').textContent = data.filter(o => o.status === 'delivered').length;
-
-      const list = document.getElementById('ordersList');
-      if (data.length === 0) {
-        list.innerHTML = '<div class="empty-state"><div class="ei">📋</div><p>No orders yet</p><span style="font-size:13px">Customer orders will appear here</span></div>';
-        return;
-      }
-
-      const riderOptions = RIDERS.map(r => `<option value="${r}">${r}</option>`).join('');
-
-      list.innerHTML = data.slice().reverse().map(o => `
-        <div class="order-card">
-          <div class="order-card-top">
-            <span class="order-id">Order #${String(o.id).slice(-6)}</span>
-            <span class="order-status ${statusClass(o.status)}">${statusIcon(o.status)} ${o.status}</span>
-          </div>
-          <div class="order-food">${o.food}</div>
-          <div class="order-address">📍 ${o.address}</div>
-          <div class="order-fee">🛵 Delivery Fee: ₦${o.deliveryFee}</div>
-          <div class="order-rider-row"><span class="rider-tag">👤 ${o.rider}</span></div>
-          ${o.status === 'pending' || o.status === 'ready'
-            ? `<div class="assign-section">
-                <select class="rider-select" id="rider-${o.id}">
-                  <option value="">Select a rider…</option>
-                  ${riderOptions}
-                </select>
-                <button class="assign-btn" onclick="assign(${o.id})">Assign</button>
-               </div>`
-            : o.status === 'rider assigned'
-            ? `<div class="assigned-badge">🛵 Rider en route</div>`
-            : `<div class="assigned-badge">🎉 Delivered</div>`}
-        </div>`).join('');
-    });
+function placeOrder(){
+  const food=document.getElementById('foodInput').value.trim();
+  const address=document.getElementById('addressInput').value.trim();
+  if(!food){showToast('Please select a food item first',true);return;}
+  if(!address){showToast('Please enter your delivery address',true);return;}
+  fetch('/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({food,address,foodPrice:selPrice})})
+  .then(r=>r.json()).then(data=>{
+    myOrderIds.push(data.id);
+    localStorage.setItem('myOrderIds',JSON.stringify(myOrderIds));
+    document.getElementById('foodInput').value='';
+    document.getElementById('addressInput').value='';
+    document.querySelectorAll('.food-card').forEach(c=>c.classList.remove('sel'));
+    selPrice=0;
+    showToast('Order placed! Total ₦'+data.total.toLocaleString(),false,true);
+    loadOrders();
+  }).catch(()=>showToast('Could not connect to server',true));
 }
 
-function assign(id) {
-  const select = document.getElementById('rider-' + id);
-  const rider = select?.value;
-  if (!rider) { showToast('Please select a rider first', true); return; }
-  fetch('/assign-rider/' + id, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ rider })
-  }).then(() => { showToast('Rider assigned! 🛵'); load(); });
+function loadOrders(){
+  fetch('/orders').then(r=>r.json()).then(data=>{
+    const mine=data.filter(o=>myOrderIds.includes(o.id));
+    const el=document.getElementById('myOrders');
+    if(!mine.length){el.innerHTML='<div class="empty-msg">🍽️<br>No orders yet.<br>Pick something above!</div>';return;}
+    el.innerHTML=mine.slice().reverse().map(o=>`
+      <div class="oc">
+        <div class="oc-top"><div class="oc-name">${o.food}</div><span class="chip ${sc(o.status)}">${si(o.status)} ${o.status}</span></div>
+        <div class="oc-addr">📍 ${o.address}</div>
+        <div class="oc-rider">🛵 ${o.rider}</div>
+        <div class="breakdown">
+          <div class="br-row"><span>Food</span><span>₦${(o.foodPrice||0).toLocaleString()}</span></div>
+          <div class="br-row"><span>Delivery fee</span><span>₦${(o.deliveryFee||0).toLocaleString()}</span></div>
+          <div class="br-total"><span>Total</span><span class="br-amt">₦${(o.total||0).toLocaleString()}</span></div>
+        </div>
+      </div>`).join('');
+  }).catch(()=>{});
 }
 
-function setPrice() {
-  const price = document.getElementById('priceInput').value;
-  if (!price || isNaN(price) || Number(price) < 0) { showToast('Enter a valid price', true); return; }
-  fetch('/set-delivery-price', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ price: Number(price) })
-  }).then(res => res.json())
-    .then(data => {
-      document.getElementById('currentFee').textContent = '₦' + data.price.toLocaleString();
-      document.getElementById('priceInput').value = '';
-      showToast('Delivery fee updated to ₦' + data.price);
-    });
+function sc(s){return s==='pending'?'sp':s==='ready'?'sr':s==='rider assigned'?'sa':'sd';}
+function si(s){return s==='pending'?'⏳':s==='ready'?'✅':s==='rider assigned'?'🛵':'🎉';}
+
+function showToast(msg,err=false,ok=false){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className='toast'+(err?' err':ok?' ok':'');
+  t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);
 }
 
-function showToast(msg, err=false) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.className = 'toast' + (err ? ' err' : '');
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
-}
-
-load();
-setInterval(load, 5000);
+loadOrders();
+setInterval(loadOrders,5000);
 </script>
 
 </body>
