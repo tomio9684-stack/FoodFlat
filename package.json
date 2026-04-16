@@ -1,7 +1,7 @@
 {
   "name": "foodflat",
   "version": "1.0.0",
-  "description": "Foodflat delivery platform",
+  "description": "Foodflat delivery app",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
