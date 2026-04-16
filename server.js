@@ -8,58 +8,124 @@ app.use(express.json());
 app.use(express.static("public"));
 
 let orders = [];
-let deliveryPrice = 800;
+let deliveryFee = 2000;
+
+// Create Order
 
 app.post("/order", (req, res) => {
-    const foodPrice = Number(req.body.foodPrice) || 0;
-    const order = {
-        id: Date.now(),
-        food: req.body.food,
-        address: req.body.address,
-        foodPrice: foodPrice,
-        deliveryFee: deliveryPrice,
-        total: foodPrice + deliveryPrice,
-        status: "pending",
-        rider: "Not assigned"
-    };
-    orders.push(order);
-    res.json(order);
+
+const order = {
+
+id: Date.now(),
+
+food: req.body.food,
+
+address: req.body.address,
+
+status: "pending",
+
+rider: "Not assigned",
+
+deliveryFee: deliveryFee
+
+};
+
+orders.push(order);
+
+res.json(order);
+
 });
+
+
+// Get Orders
 
 app.get("/orders", (req, res) => {
-    res.json(orders);
+
+res.json(orders);
+
 });
 
-app.post("/assign-rider/:id", (req, res) => {
-    const id = Number(req.params.id);
-    const order = orders.find(o => o.id === id);
-    if (!order) return res.status(404).json({ error: "Order not found" });
-    order.rider = req.body.rider;
-    order.status = "rider assigned";
-    res.json(order);
-});
+
+// Vendor marks ready
 
 app.post("/ready/:id", (req, res) => {
-    const id = Number(req.params.id);
-    const order = orders.find(o => o.id === id);
-    if (!order) return res.status(404).json({ error: "Order not found" });
-    order.status = "ready";
-    res.json(order);
+
+const id = Number(req.params.id);
+
+const order = orders.find(o => o.id === id);
+
+if(order){
+
+order.status = "ready";
+
+}
+
+res.json(order);
+
 });
+
+
+// Admin assigns rider
+
+app.post("/assign-rider/:id", (req, res) => {
+
+const id = Number(req.params.id);
+
+const order = orders.find(o => o.id === id);
+
+if(order){
+
+order.rider = req.body.rider;
+
+order.status = "rider assigned";
+
+}
+
+res.json(order);
+
+});
+
+
+// Rider delivers
 
 app.post("/deliver/:id", (req, res) => {
-    const id = Number(req.params.id);
-    const order = orders.find(o => o.id === id);
-    if (!order) return res.status(404).json({ error: "Order not found" });
-    order.status = "delivered";
-    res.json(order);
+
+const id = Number(req.params.id);
+
+const order = orders.find(o => o.id === id);
+
+if(order){
+
+order.status = "delivered";
+
+}
+
+res.json(order);
+
 });
+
+
+// Set Delivery Fee
 
 app.post("/set-delivery-price", (req, res) => {
-    deliveryPrice = Number(req.body.price);
-    res.json({ message: "Delivery price updated", price: deliveryPrice });
+
+deliveryFee = req.body.price;
+
+res.json({
+
+message: "Delivery fee updated",
+
+deliveryFee: deliveryFee
+
 });
 
+});
+
+
+// Start Server
+
 app.listen(3000, () => {
-    console.log("Foodflat running on http://localhost:3000");
+
+console.log("Foodflat server running on port 3000");
+
 });
