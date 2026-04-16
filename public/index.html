@@ -1,613 +1,109 @@
 <!DOCTYPE html>
-
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FoodFlat – Select and Eat</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Foodflat</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-body{font-family:'DM Sans',sans-serif;background:#2C1508;color:#1A0A00;max-width:430px;margin:0 auto;min-height:100vh;overflow-x:hidden;}
 
-.screen{display:none;min-height:100vh;background:#FDF6EE;animation:fadeIn 0.3s ease;}
-.screen.active{display:block;}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-
-/* ROLE SCREEN */
-#screen-role{
-background:#2C1508 !important;
-display:flex;flex-direction:column;align-items:center;
-justify-content:center;min-height:100vh;padding:40px 24px;
+body{
+font-family: Arial;
+margin:0;
+background:#f6f6f6;
 }
-.role-logo{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
-.role-logo-icon{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#C84B11,#E8652A);display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 4px 20px rgba(200,75,17,0.4);}
-.role-logo-name{font-family:‘Playfair Display’,serif;font-size:28px;font-weight:800;color:#FFFFFF;}
-.role-logo-tag{font-size:12px;color:rgba(255,255,255,0.4);}
-.role-tagline{font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:40px;text-align:center;}
-.role-title{font-family:‘Playfair Display’,serif;font-size:22px;color:#FFFFFF;margin-bottom:6px;text-align:center;}
-.role-sub{font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:28px;text-align:center;}
-.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;}
-.role-card{background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.15);border-radius:20px;padding:24px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;transition:all 0.2s;}
-.role-card:active{background:rgba(255,255,255,0.18);border-color:#E8652A;transform:scale(0.97);}
-.role-card-icon{font-size:36px;}
-.role-card-name{font-size:15px;font-weight:700;color:#FFFFFF;}
-.role-card-desc{font-size:11px;color:rgba(255,255,255,0.5);text-align:center;}
 
-/* TOPBAR */
-.topbar{background:#2C1508;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,0.5);}
-.logo{display:flex;align-items:center;gap:10px;cursor:pointer;}
-.logo-icon{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#C84B11,#E8652A);display:flex;align-items:center;justify-content:center;font-size:20px;}
-.logo-name{font-family:‘Playfair Display’,serif;font-size:19px;font-weight:800;color:#FFFFFF;}
-.logo-tag{font-size:10px;color:rgba(255,255,255,0.4);}
-.switch-btn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.8);font-family:‘DM Sans’,sans-serif;font-size:11px;font-weight:600;padding:7px 12px;border-radius:20px;cursor:pointer;}
+.header{
+background:#5a2d0c;
+color:white;
+padding:18px;
+font-size:22px;
+text-align:center;
+}
 
-/* HERO */
-.hero{background:#2C1508;padding:28px 20px 68px;position:relative;overflow:hidden;}
-.hero-inner{background:linear-gradient(175deg,#2C1508 0%,#4A2010 55%,#6B3520 100%);position:absolute;inset:0;}
-.hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(200,75,17,0.25) 0%,transparent 70%);}
-.hero-emoji{position:absolute;right:-8px;bottom:-12px;font-size:130px;opacity:0.1;}
-.hero-content{position:relative;z-index:1;}
-.hero-loc{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.18);border-radius:20px;padding:5px 12px;font-size:11px;color:rgba(255,255,255,0.75);margin-bottom:14px;}
-.hero-loc-city{color:#E8652A;font-weight:700;}
-.hero-h1{font-family:‘Playfair Display’,serif;font-size:28px;font-weight:800;color:#FFFFFF;line-height:1.2;margin-bottom:4px;}
-.hero-em{font-style:italic;color:#E8652A;}
-.hero-sub{color:rgba(255,255,255,0.5);font-size:13px;margin-bottom:20px;}
-.search-bar{display:flex;align-items:center;background:#FFFFFF;border-radius:14px;padding:5px 5px 5px 16px;box-shadow:0 8px 32px rgba(44,21,8,0.3);}
-.search-bar input{flex:1;border:none;outline:none;font-family:‘DM Sans’,sans-serif;font-size:14px;color:#1A0A00;background:transparent;}
-.search-bar input::placeholder{color:#9A7A60;}
-.search-bar-btn{background:linear-gradient(135deg,#C84B11,#E8652A);border:none;cursor:pointer;width:38px;height:38px;border-radius:10px;color:white;font-size:16px;}
+.search{
+padding:15px;
+}
 
-/* CONTENT */
-.content{margin-top:-40px;padding:0 16px 100px;position:relative;z-index:1;}
+input{
+width:100%;
+padding:12px;
+border-radius:10px;
+border:1px solid #ddd;
+}
 
-/* PROMO */
-.promo{background:#C84B11;background:linear-gradient(120deg,#9B3510 0%,#C84B11 50%,#E8652A 100%);border-radius:20px;padding:20px;margin-bottom:4px;position:relative;overflow:hidden;box-shadow:0 6px 24px rgba(200,75,17,0.4);}
-.promo-glow{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:48px;opacity:0.25;}
-.promo-tag{display:inline-block;background:rgba(255,255,255,0.2);color:#FFFFFF;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:8px;}
-.promo-h3{font-family:‘Playfair Display’,serif;font-size:18px;color:#FFFFFF;margin-bottom:4px;}
-.promo-p{font-size:12px;color:rgba(255,255,255,0.85);margin-bottom:12px;}
-.promo-btn{display:inline-block;background:#FFFFFF;color:#C84B11;font-size:12px;font-weight:700;padding:8px 18px;border-radius:20px;border:none;cursor:pointer;font-family:‘DM Sans’,sans-serif;}
+.card{
+background:white;
+margin:15px;
+padding:18px;
+border-radius:14px;
+box-shadow:0 3px 8px rgba(0,0,0,0.08);
+}
 
-/* SECTION HEAD */
-.sec-head{display:flex;justify-content:space-between;align-items:center;margin:22px 0 14px;}
-.sec-head-title{font-family:‘Playfair Display’,serif;font-size:18px;color:#2C1508;}
-.sec-head-count{font-size:12px;color:#C84B11;font-weight:600;}
+button{
+background:#ff6a00;
+color:white;
+border:none;
+padding:12px 18px;
+border-radius:10px;
+font-size:15px;
+}
 
-/* FOOD CARDS */
-.food-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.food-card{background:#FFFFFF;border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(44,21,8,0.12);cursor:pointer;transition:transform 0.2s;border:2px solid transparent;}
-.food-card:active{transform:scale(0.97);}
-.food-card.sel{border-color:#C84B11;box-shadow:0 4px 20px rgba(200,75,17,0.3);}
-.fci{height:88px;background:linear-gradient(135deg,#F0E4D4,#E8D5BE);display:flex;align-items:center;justify-content:center;font-size:46px;position:relative;}
-.fci-tag{position:absolute;top:7px;right:7px;background:#C84B11;color:#FFFFFF;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;}
-.fcb{padding:10px 12px 12px;}
-.fcb-name{font-size:13px;font-weight:700;color:#1A0A00;margin-bottom:2px;}
-.fcb-price{font-size:14px;font-weight:700;color:#C84B11;margin-bottom:8px;}
-.fcb-btn{width:100%;background:linear-gradient(135deg,#C84B11,#E8652A);color:#FFFFFF;border:none;cursor:pointer;font-family:‘DM Sans’,sans-serif;font-size:12px;font-weight:700;padding:8px;border-radius:10px;}
-
-/* ORDER FORM */
-.order-form{background:#FFFFFF;border-radius:22px;padding:22px;box-shadow:0 4px 20px rgba(44,21,8,0.12);margin-top:22px;border:1.5px solid #F0E4D4;}
-.form-title{font-family:‘Playfair Display’,serif;font-size:20px;color:#2C1508;margin-bottom:4px;}
-.form-sub{font-size:12px;color:#9A7A60;margin-bottom:18px;}
-.fg{margin-bottom:14px;}
-.fl{font-size:11px;color:#9A7A60;text-transform:uppercase;letter-spacing:0.6px;font-weight:700;margin-bottom:6px;display:block;}
-.fi{width:100%;background:#FDF6EE;border:1.5px solid #F0E4D4;border-radius:12px;padding:13px 14px;color:#1A0A00;font-family:‘DM Sans’,sans-serif;font-size:14px;outline:none;transition:border-color 0.2s;}
-.fi:focus{border-color:#C84B11;}
-.fi::placeholder{color:#9A7A60;}
-.sub-btn{width:100%;background:linear-gradient(135deg,#2C1508 0%,#C84B11 60%,#E8652A 100%);color:#FFFFFF;border:none;cursor:pointer;font-family:‘DM Sans’,sans-serif;font-size:16px;font-weight:700;padding:16px;border-radius:14px;margin-top:4px;box-shadow:0 6px 24px rgba(200,75,17,0.35);}
-.sub-btn:active{transform:scale(0.98);opacity:0.9;}
-
-/* MY ORDERS BOX */
-.my-orders-box{background:#FFFFFF;border-radius:22px;padding:22px;box-shadow:0 4px 20px rgba(44,21,8,0.12);margin-top:22px;border:1.5px solid #F0E4D4;}
-.mo-title{font-family:‘Playfair Display’,serif;font-size:20px;color:#2C1508;margin-bottom:16px;}
-.empty-msg{text-align:center;padding:28px;color:#9A7A60;font-size:14px;line-height:2;}
-
-/* ORDER CARD */
-.oc{background:#FDF6EE;border-radius:16px;padding:16px;margin-bottom:12px;border-left:4px solid #C84B11;box-shadow:0 2px 8px rgba(44,21,8,0.08);}
-.oc-name{font-size:15px;font-weight:700;color:#1A0A00;margin-bottom:4px;}
-.oc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;gap:6px;}
-.oc-addr{font-size:12px;color:#9A7A60;margin-bottom:4px;}
-.oc-rider{font-size:12px;color:#5A3A20;margin-bottom:10px;}
-.chip{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap;}
-.sp{background:rgba(200,75,17,0.12);color:#C84B11;}
-.sr{background:rgba(34,197,94,0.12);color:#15803d;}
-.sa{background:rgba(59,130,246,0.12);color:#1d4ed8;}
-.sd{background:rgba(80,80,80,0.1);color:#555;}
-.breakdown{background:#FFFFFF;border-radius:12px;padding:12px;}
-.breakdown-sm{background:#FDF6EE;border-radius:12px;padding:12px;margin-bottom:14px;}
-.br-row{display:flex;justify-content:space-between;font-size:13px;color:#5A3A20;margin-bottom:4px;}
-.br-total{display:flex;justify-content:space-between;font-size:15px;font-weight:800;border-top:1.5px solid #F0E4D4;padding-top:8px;margin-top:4px;}
-.br-amt{color:#C84B11;font-family:‘Playfair Display’,serif;}
-
-/* PAGE HERO */
-.page-hero{padding:28px 20px;position:relative;overflow:hidden;}
-.ph-vendor{background:linear-gradient(135deg,#2C1508 0%,#4A2010 60%,#8B4513 100%);}
-.ph-rider{background:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 60%,#3b82f6 100%);}
-.ph-admin{background:linear-gradient(135deg,#2C1508 0%,#4A2010 50%,#6B3520 100%);}
-.ph-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(200,75,17,0.2) 0%,transparent 70%);}
-.ph-emoji{position:absolute;right:20px;bottom:-10px;font-size:80px;opacity:0.15;}
-.ph-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.18);border-radius:20px;padding:5px 12px;font-size:11px;color:rgba(255,255,255,0.75);margin-bottom:12px;position:relative;z-index:1;}
-.ph-title{font-family:‘Playfair Display’,serif;font-size:26px;font-weight:800;color:#FFFFFF;margin-bottom:4px;position:relative;z-index:1;}
-.ph-sub{font-size:13px;color:rgba(255,255,255,0.5);position:relative;z-index:1;}
-
-/* STATS */
-.stats-row-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:16px;}
-.stats-row-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:16px;}
-.stats-row-4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:16px;}
-.stat{background:#FFFFFF;border-radius:16px;padding:14px 10px;text-align:center;box-shadow:0 4px 20px rgba(44,21,8,0.12);border:1.5px solid #F0E4D4;}
-.stat-num{font-family:‘Playfair Display’,serif;font-size:24px;font-weight:700;}
-.orange{color:#C84B11;}
-.blue{color:#1d4ed8;}
-.stat-label{font-size:10px;color:#9A7A60;margin-top:2px;font-weight:600;}
-
-.sec-title{font-family:‘Playfair Display’,serif;font-size:18px;color:#2C1508;padding:4px 16px 12px;}
-
-/* VENDOR/RIDER/ADMIN CARDS */
-.orders-list{padding:0 16px 100px;display:flex;flex-direction:column;gap:14px;}
-.voc{background:#FFFFFF;border-radius:20px;padding:18px;box-shadow:0 4px 20px rgba(44,21,8,0.12);border:1.5px solid #F0E4D4;border-left:5px solid #C84B11;}
-.voc-blue{border-left-color:#1d4ed8;}
-.voc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
-.voc-id{font-size:11px;color:#9A7A60;font-weight:600;}
-.voc-food{font-size:16px;font-weight:700;color:#1A0A00;margin-bottom:4px;}
-.voc-addr{font-size:12px;color:#9A7A60;margin-bottom:4px;}
-.voc-rider{display:inline-flex;align-items:center;gap:5px;background:#FDF6EE;border:1px solid #F0E4D4;border-radius:20px;padding:4px 10px;font-size:12px;color:#5A3A20;margin-bottom:10px;}
-
-.ready-btn{width:100%;background:linear-gradient(135deg,#166534,#15803d);color:#FFFFFF;border:none;cursor:pointer;font-family:‘DM Sans’,sans-serif;font-size:14px;font-weight:700;padding:13px;border-radius:12px;box-shadow:0 4px 16px rgba(21,128,61,0.25);}
-.ready-badge{display:flex;align-items:center;justify-content:center;gap:6px;background:rgba(34,197,94,0.12);color:#15803d;font-size:13px;font-weight:700;padding:10px;border-radius:12px;}
-.deliver-btn{width:100%;background:linear-gradient(135deg,#1e3a8a,#1d4ed8);color:#FFFFFF;border:none;cursor:pointer;font-family:‘DM Sans’,sans-serif;font-size:14px;font-weight:700;padding:13px;border-radius:12px;box-shadow:0 4px 16px rgba(29,78,216,0.25);}
-.assigned-badge{display:flex;align-items:center;justify-content:center;gap:6px;background:rgba(34,197,94,0.12);color:#15803d;font-size:13px;font-weight:700;padding:10px;border-radius:12px;}
-.delivered-badge{display:flex;align-items:center;justify-content:center;gap:6px;background:rgba(80,80,80,0.08);color:#555;font-size:13px;font-weight:700;padding:10px;border-radius:12px;}
-
-.map-mini{background:linear-gradient(135deg,#d4e8c2,#a8d090);border-radius:14px;height:72px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;position:relative;overflow:hidden;}
-.map-mini::before{content:’’;position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 16px,rgba(255,255,255,0.15) 16px,rgba(255,255,255,0.15) 17px),repeating-linear-gradient(90deg,transparent,transparent 16px,rgba(255,255,255,0.15) 16px,rgba(255,255,255,0.15) 17px);}
-.map-label{background:#FFFFFF;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:700;color:#2C1508;box-shadow:0 2px 8px rgba(0,0,0,0.15);z-index:1;position:relative;}
-
-/* ADMIN */
-.fee-card{background:#FFFFFF;border-radius:20px;padding:20px;margin:0 16px 6px;box-shadow:0 4px 20px rgba(44,21,8,0.12);border:1.5px solid #F0E4D4;}
-.fee-title{font-family:‘Playfair Display’,serif;font-size:18px;color:#2C1508;margin-bottom:4px;}
-.fee-sub{font-size:12px;color:#9A7A60;margin-bottom:14px;}
-.fee-row{display:flex;gap:10px;align-items:center;}
-.fee-input{flex:1;background:#FDF6EE;border:1.5px solid #F0E4D4;border-radius:12px;padding:12px 14px;font-family:‘DM Sans’,sans-serif;font-size:15px;color:#1A0A00;outline:none;}
-.fee-input:focus{border-color:#C84B11;}
-.fee-btn{background:linear-gradient(135deg,#C84B11,#E8652A);color:#FFFFFF;border:none;cursor:pointer;font-family:‘DM Sans’,sans-serif;font-size:13px;font-weight:700;padding:12px 16px;border-radius:12px;}
-.current-fee{font-size:12px;color:#9A7A60;margin-top:10px;}
-.current-fee strong{color:#C84B11;font-size:14px;}
-.assign-row{display:flex;gap:8px;}
-.rider-sel{flex:1;background:#FDF6EE;border:1.5px solid #F0E4D4;border-radius:12px;padding:11px 12px;font-family:‘DM Sans’,sans-serif;font-size:13px;color:#1A0A00;outline:none;appearance:none;}
-.assign-btn{background:linear-gradient(135deg,#C84B11,#E8652A);color:#FFFFFF;border:none;cursor:pointer;font-family:‘DM Sans’,sans-serif;font-size:13px;font-weight:700;padding:11px 16px;border-radius:12px;}
-.refresh-btn{background:rgba(200,75,17,0.08);border:none;color:#C84B11;font-family:‘DM Sans’,sans-serif;font-size:12px;font-weight:700;cursor:pointer;padding:6px 12px;border-radius:20px;}
-
-.empty{text-align:center;padding:60px 20px;color:#9A7A60;}
-.empty-icon{font-size:52px;margin-bottom:12px;}
-.empty p{font-size:15px;color:#5A3A20;font-weight:600;margin-bottom:4px;}
-
-/* BOTTOM NAV */
-.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:#FFFFFF;border-top:1.5px solid #F0E4D4;display:flex;justify-content:space-around;padding:10px 0 22px;z-index:100;box-shadow:0 -4px 24px rgba(44,21,8,0.1);}
-.ni{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;font-weight:600;color:#9A7A60;text-decoration:none;cursor:pointer;transition:color 0.2s;}
-.ni.active{color:#C84B11;}
-.niw{width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;}
-.ni.active .niw{background:rgba(200,75,17,0.1);}
-
-/* TOAST */
-.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-90px);color:#FFFFFF;padding:12px 22px;border-radius:50px;font-size:13px;font-weight:600;z-index:500;transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,0.2);}
-.toast.show{transform:translateX(-50%) translateY(0);}
-.toast.ok{background:#15803d;}
-.toast.err{background:#C84B11;}
-.toast.info{background:#2C1508;}
 </style>
-
 </head>
+
 <body>
 
-<!-- ════════ ROLE SELECTOR ════════ -->
-
-<div class="screen active" id="screen-role" style="background:linear-gradient(175deg,#2C1508 0%,#4A2010 50%,#6B3520 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:40px 24px;">
-  <div class="role-logo">
-    <div class="role-logo-icon">🍛</div>
-    <div>
-      <div class="role-logo-name">FoodFlat</div>
-      <div class="role-logo-tag">...Select and Eat</div>
-    </div>
-  </div>
-  <p class="role-tagline">Fast food delivery around Kola, Lagos</p>
-  <p class="role-title">Who are you?</p>
-  <p class="role-sub">Select your role to continue</p>
-  <div class="role-grid">
-    <div class="role-card" onclick="setRole('customer')">
-      <div class="role-card-icon">🛍️</div>
-      <div class="role-card-name">Customer</div>
-      <div class="role-card-desc">Order food & track delivery</div>
-    </div>
-    <div class="role-card" onclick="setRole('vendor')">
-      <div class="role-card-icon">🏪</div>
-      <div class="role-card-name">Vendor</div>
-      <div class="role-card-desc">Manage & prepare orders</div>
-    </div>
-    <div class="role-card" onclick="setRole('rider')">
-      <div class="role-card-icon">🛵</div>
-      <div class="role-card-name">Rider</div>
-      <div class="role-card-desc">Pick up & deliver orders</div>
-    </div>
-    <div class="role-card" onclick="setRole('admin')">
-      <div class="role-card-icon">⚙️</div>
-      <div class="role-card-name">Admin</div>
-      <div class="role-card-desc">Manage all operations</div>
-    </div>
-  </div>
+<div class="header">
+Foodflat — Order Food
 </div>
 
-<!-- ════════ CUSTOMER ════════ -->
-
-<div class="screen" id="screen-customer">
-  <div class="topbar">
-    <div class="logo" onclick="goRole()">
-      <div class="logo-icon">🍛</div>
-      <div><div class="logo-name">FoodFlat</div><div class="logo-tag">...Select and Eat</div></div>
-    </div>
-    <button class="switch-btn" onclick="goRole()">⇄ Switch Role</button>
-  </div>
-
-  <div class="hero" style="background:linear-gradient(175deg,#2C1508 0%,#4A2010 55%,#6B3520 100%);">
-    <div class="hero-glow"></div>
-    <div class="hero-emoji">🍛</div>
-    <div class="hero-content">
-      <div class="hero-loc">📍 Delivering to <span class="hero-loc-city">Kola, Lagos</span></div>
-      <div class="hero-h1">Your Favorite Food<br><span class="hero-em">Delivered Fast</span></div>
-      <div class="hero-sub">Order from the best spots around you</div>
-      <div class="search-bar">
-        <input type="text" placeholder="Search for food or restaurants...">
-        <button class="search-bar-btn">🔍</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="content">
-    <div class="promo" style="background:linear-gradient(120deg,#9B3510 0%,#C84B11 50%,#E8652A 100%);">
-      <div class="promo-glow">🎉</div>
-      <div class="promo-tag">🔥 Limited Offer</div>
-      <div class="promo-h3">20% Off Your First Order!</div>
-      <div class="promo-p">Use code <strong>FLATFOOD</strong> at checkout</div>
-      <button class="promo-btn">Claim Now →</button>
-    </div>
-
-```
-<div class="sec-head">
-  <div class="sec-head-title">What would you like?</div>
-  <span class="sec-head-count">6 items</span>
-</div>
-<div class="food-grid">
-  <div class="food-card" onclick="selectFood(this,'Amala & Ewedu',1500)">
-    <div class="fci">🍲<span class="fci-tag">Popular</span></div>
-    <div class="fcb"><div class="fcb-name">Amala & Ewedu</div><div class="fcb-price">₦1,500</div><button class="fcb-btn">Order Now</button></div>
-  </div>
-  <div class="food-card" onclick="selectFood(this,'Jollof Rice & Chicken',2500)">
-    <div class="fci">🍚<span class="fci-tag">🔥 Hot</span></div>
-    <div class="fcb"><div class="fcb-name">Jollof Rice & Chicken</div><div class="fcb-price">₦2,500</div><button class="fcb-btn">Order Now</button></div>
-  </div>
-  <div class="food-card" onclick="selectFood(this,'Chicken Shawarma',2000)">
-    <div class="fci">🌯</div>
-    <div class="fcb"><div class="fcb-name">Chicken Shawarma</div><div class="fcb-price">₦2,000</div><button class="fcb-btn">Order Now</button></div>
-  </div>
-  <div class="food-card" onclick="selectFood(this,'Pepper Soup',1800)">
-    <div class="fci">🍜</div>
-    <div class="fcb"><div class="fcb-name">Pepper Soup</div><div class="fcb-price">₦1,800</div><button class="fcb-btn">Order Now</button></div>
-  </div>
-  <div class="food-card" onclick="selectFood(this,'Grilled Chicken & Chips',2800)">
-    <div class="fci">🍗</div>
-    <div class="fcb"><div class="fcb-name">Grilled Chicken & Chips</div><div class="fcb-price">₦2,800</div><button class="fcb-btn">Order Now</button></div>
-  </div>
-  <div class="food-card" onclick="selectFood(this,'Suya & Bread',1200)">
-    <div class="fci">🍢</div>
-    <div class="fcb"><div class="fcb-name">Suya & Bread</div><div class="fcb-price">₦1,200</div><button class="fcb-btn">Order Now</button></div>
-  </div>
+<div class="search">
+<input placeholder="Search food or restaurant">
 </div>
 
-<div class="order-form">
-  <div class="form-title">Place Your Order</div>
-  <div class="form-sub">Tap a food card above then fill in your address</div>
-  <div class="fg"><label class="fl">Selected Food</label><input class="fi" id="foodInput" placeholder="Tap a food card above…" type="text" readonly></div>
-  <div class="fg"><label class="fl">Delivery Address</label><input class="fi" id="addressInput" placeholder="e.g. 12 Kola Street, Lagos" type="text"></div>
-  <button class="sub-btn" onclick="placeOrder()">🛒 &nbsp;Place Order</button>
+<div class="card">
+
+<h3>Mama T Amala</h3>
+
+<p>25 mins • Delivery ₦800</p>
+
+<button onclick="order()">
+Order Now
+</button>
+
 </div>
-
-<div class="my-orders-box">
-  <div class="mo-title">My Orders</div>
-  <div id="myOrders"><div class="empty-msg">🍽️<br>No orders yet.<br>Pick something above!</div></div>
-</div>
-```
-
-  </div>
-
-  <nav class="bottom-nav">
-    <div class="ni active"><div class="niw">🏠</div><span>Home</span></div>
-    <div class="ni" onclick="loadCustomerOrders()"><div class="niw">📋</div><span>Orders</span></div>
-    <div class="ni" onclick="goRole()"><div class="niw">🔄</div><span>Switch</span></div>
-  </nav>
-</div>
-
-<!-- ════════ VENDOR ════════ -->
-
-<div class="screen" id="screen-vendor">
-  <div class="topbar">
-    <div class="logo" onclick="goRole()">
-      <div class="logo-icon">🍛</div>
-      <div><div class="logo-name">FoodFlat</div><div class="logo-tag">Vendor Panel</div></div>
-    </div>
-    <button class="switch-btn" onclick="goRole()">⇄ Switch Role</button>
-  </div>
-  <div class="page-hero ph-vendor" style="background:linear-gradient(135deg,#2C1508 0%,#4A2010 60%,#8B4513 100%);">
-    <div class="ph-glow"></div>
-    <div class="ph-emoji">🏪</div>
-    <div class="ph-tag">🏪 Vendor Dashboard</div>
-    <div class="ph-title">Manage Orders</div>
-    <div class="ph-sub">Mark orders ready when food is prepared</div>
-  </div>
-  <div class="stats-row-3">
-    <div class="stat"><div class="stat-num orange" id="v-total">0</div><div class="stat-label">Total</div></div>
-    <div class="stat"><div class="stat-num orange" id="v-pending">0</div><div class="stat-label">Pending</div></div>
-    <div class="stat"><div class="stat-num orange" id="v-ready">0</div><div class="stat-label">Ready</div></div>
-  </div>
-  <div class="sec-title">Incoming Orders</div>
-  <div class="orders-list" id="vendorOrders"></div>
-  <nav class="bottom-nav">
-    <div class="ni active"><div class="niw">🏪</div><span>Orders</span></div>
-    <div class="ni" onclick="loadVendor()"><div class="niw">🔄</div><span>Refresh</span></div>
-    <div class="ni" onclick="goRole()"><div class="niw">🔀</div><span>Switch</span></div>
-  </nav>
-</div>
-
-<!-- ════════ RIDER ════════ -->
-
-<div class="screen" id="screen-rider">
-  <div class="topbar">
-    <div class="logo" onclick="goRole()">
-      <div class="logo-icon">🍛</div>
-      <div><div class="logo-name">FoodFlat</div><div class="logo-tag">Rider Panel</div></div>
-    </div>
-    <button class="switch-btn" onclick="goRole()">⇄ Switch Role</button>
-  </div>
-  <div class="page-hero ph-rider" style="background:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 60%,#3b82f6 100%);">
-    <div class="ph-glow"></div>
-    <div class="ph-emoji">🛵</div>
-    <div class="ph-tag">🛵 Rider Dashboard</div>
-    <div class="ph-title">Pickup & Deliver</div>
-    <div class="ph-sub">Pick up ready orders and mark them delivered</div>
-  </div>
-  <div class="stats-row-2">
-    <div class="stat"><div class="stat-num blue" id="r-ready">0</div><div class="stat-label">Ready for Pickup</div></div>
-    <div class="stat"><div class="stat-num blue" id="r-done">0</div><div class="stat-label">Delivered Today</div></div>
-  </div>
-  <div class="sec-title">Ready for Pickup 📦</div>
-  <div class="orders-list" id="riderOrders"></div>
-  <nav class="bottom-nav">
-    <div class="ni active"><div class="niw">🛵</div><span>Pickups</span></div>
-    <div class="ni" onclick="loadRider()"><div class="niw">🔄</div><span>Refresh</span></div>
-    <div class="ni" onclick="goRole()"><div class="niw">🔀</div><span>Switch</span></div>
-  </nav>
-</div>
-
-<!-- ════════ ADMIN ════════ -->
-
-<div class="screen" id="screen-admin">
-  <div class="topbar">
-    <div class="logo" onclick="goRole()">
-      <div class="logo-icon">🍛</div>
-      <div><div class="logo-name">FoodFlat</div><div class="logo-tag">Admin Panel</div></div>
-    </div>
-    <button class="switch-btn" onclick="goRole()">⇄ Switch Role</button>
-  </div>
-  <div class="page-hero ph-admin" style="background:linear-gradient(135deg,#2C1508 0%,#4A2010 50%,#6B3520 100%);">
-    <div class="ph-glow"></div>
-    <div class="ph-emoji">⚙️</div>
-    <div class="ph-tag">⚙️ Admin Dashboard</div>
-    <div class="ph-title">Control Centre</div>
-    <div class="ph-sub">Assign riders, manage orders & set fees</div>
-  </div>
-  <div class="stats-row-4">
-    <div class="stat"><div class="stat-num orange" id="a-total">0</div><div class="stat-label">Total</div></div>
-    <div class="stat"><div class="stat-num orange" id="a-pending">0</div><div class="stat-label">Pending</div></div>
-    <div class="stat"><div class="stat-num orange" id="a-ready">0</div><div class="stat-label">Ready</div></div>
-    <div class="stat"><div class="stat-num orange" id="a-done">0</div><div class="stat-label">Done</div></div>
-  </div>
-  <div class="fee-card">
-    <div class="fee-title">💰 Delivery Fee</div>
-    <div class="fee-sub">Set the delivery fee charged to all customers</div>
-    <div class="fee-row">
-      <input class="fee-input" id="priceInput" type="number" placeholder="e.g. 800">
-      <button class="fee-btn" onclick="setPrice()">Update</button>
-    </div>
-    <div class="current-fee">Current fee: <strong id="currentFee">₦800</strong></div>
-  </div>
-  <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 16px 10px;">
-    <div class="sec-title" style="padding:0;">All Orders</div>
-    <button class="refresh-btn" onclick="loadAdmin()">↻ Refresh</button>
-  </div>
-  <div class="orders-list" id="adminOrders"></div>
-  <nav class="bottom-nav">
-    <div class="ni active"><div class="niw">⚙️</div><span>Orders</span></div>
-    <div class="ni" onclick="loadAdmin()"><div class="niw">🔄</div><span>Refresh</span></div>
-    <div class="ni" onclick="goRole()"><div class="niw">🔀</div><span>Switch</span></div>
-  </nav>
-</div>
-
-<div class="toast" id="toast"></div>
 
 <script>
-const RIDERS=['Rider Michael','Rider Chidi','Rider Tunde','Rider Emeka','Rider Fatima'];
-let myOrderIds=JSON.parse(localStorage.getItem('ffOrderIds')||'[]');
-let selPrice=0;
-let pollInterval=null;
 
-function setRole(role){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('screen-'+role).classList.add('active');
-  window.scrollTo(0,0);
-  clearInterval(pollInterval);
-  if(role==='customer'){loadCustomerOrders();pollInterval=setInterval(loadCustomerOrders,5000);}
-  else if(role==='vendor'){loadVendor();pollInterval=setInterval(loadVendor,5000);}
-  else if(role==='rider'){loadRider();pollInterval=setInterval(loadRider,5000);}
-  else if(role==='admin'){loadAdmin();pollInterval=setInterval(loadAdmin,5000);}
+function order(){
+
+fetch("/order",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+food:"Amala",
+
+address:"Kola"
+
+})
+
+})
+.then(res=>res.json())
+.then(data=>{
+
+alert("Order placed successfully")
+
+})
+
 }
 
-function goRole(){
-  clearInterval(pollInterval);
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('screen-role').classList.add('active');
-  window.scrollTo(0,0);
-}
-
-function sc(s){return s==='pending'?'sp':s==='ready'?'sr':s==='rider assigned'?'sa':'sd';}
-function si(s){return s==='pending'?'⏳':s==='ready'?'✅':s==='rider assigned'?'🛵':'🎉';}
-function fmt(n){return Number(n||0).toLocaleString();}
-
-function bdown(o,light){
-  const bg=light?'background:#FDF6EE;':'background:#FFFFFF;';
-  return `<div class="breakdown${light?'-sm':''}" style="${bg}border-radius:12px;padding:12px;margin-bottom:${light?'14':'0'}px;">
-    <div class="br-row"><span>Food</span><span>₦${fmt(o.foodPrice)}</span></div>
-    <div class="br-row"><span>Delivery fee</span><span>₦${fmt(o.deliveryFee)}</span></div>
-    <div class="br-total"><span>Total</span><span class="br-amt">₦${fmt(o.total)}</span></div>
-  </div>`;}
-
-function showToast(msg,type='info'){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.className='toast '+type;
-  t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);
-}
-
-function selectFood(card,name,price){
-  document.querySelectorAll('.food-card').forEach(c=>c.classList.remove('sel'));
-  card.classList.add('sel');
-  document.getElementById('foodInput').value=name;
-  selPrice=price;
-  document.getElementById('addressInput').focus();
-  showToast('Selected: '+name+' — ₦'+price.toLocaleString(),'info');
-}
-
-function placeOrder(){
-  const food=document.getElementById('foodInput').value.trim();
-  const address=document.getElementById('addressInput').value.trim();
-  if(!food){showToast('Please select a food item first','err');return;}
-  if(!address){showToast('Please enter your delivery address','err');return;}
-  fetch('/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({food,address,foodPrice:selPrice})})
-  .then(r=>r.json()).then(data=>{
-    myOrderIds.push(data.id);
-    localStorage.setItem('ffOrderIds',JSON.stringify(myOrderIds));
-    document.getElementById('foodInput').value='';
-    document.getElementById('addressInput').value='';
-    document.querySelectorAll('.food-card').forEach(c=>c.classList.remove('sel'));
-    selPrice=0;
-    showToast('Order placed! Total ₦'+fmt(data.total),'ok');
-    loadCustomerOrders();
-  }).catch(()=>showToast('Could not connect to server','err'));
-}
-
-function loadCustomerOrders(){
-  fetch('/orders').then(r=>r.json()).then(data=>{
-    const mine=data.filter(o=>myOrderIds.includes(o.id));
-    const el=document.getElementById('myOrders');
-    if(!mine.length){el.innerHTML='<div class="empty-msg">🍽️<br>No orders yet.<br>Pick something above!</div>';return;}
-    el.innerHTML=mine.slice().reverse().map(o=>`
-      <div class="oc">
-        <div class="oc-top"><div class="oc-name">${o.food}</div><span class="chip ${sc(o.status)}">${si(o.status)} ${o.status}</span></div>
-        <div class="oc-addr">📍 ${o.address}</div>
-        <div class="oc-rider">🛵 ${o.rider}</div>
-        ${bdown(o,false)}
-      </div>`).join('');
-  }).catch(()=>{});
-}
-
-function loadVendor(){
-  fetch('/orders').then(r=>r.json()).then(data=>{
-    document.getElementById('v-total').textContent=data.length;
-    document.getElementById('v-pending').textContent=data.filter(o=>o.status==='pending').length;
-    document.getElementById('v-ready').textContent=data.filter(o=>o.status==='ready').length;
-    const el=document.getElementById('vendorOrders');
-    if(!data.length){el.innerHTML='<div class="empty"><div class="empty-icon">🍽️</div><p>No orders yet</p></div>';return;}
-    el.innerHTML=data.slice().reverse().map(o=>`
-      <div class="voc">
-        <div class="voc-top"><span class="voc-id">Order #${String(o.id).slice(-6)}</span><span class="chip ${sc(o.status)}">${si(o.status)} ${o.status}</span></div>
-        <div class="voc-food">${o.food}</div>
-        <div class="voc-addr">📍 ${o.address}</div>
-        <div class="voc-rider">👤 ${o.rider}</div>
-        ${bdown(o,true)}
-        ${o.status==='pending'||o.status==='rider assigned'
-          ?`<button class="ready-btn" onclick="markReady(${o.id})">✅ Mark as Ready</button>`
-          :`<div class="ready-badge">✅ Marked as Ready</div>`}
-      </div>`).join('');
-  });
-}
-
-function markReady(id){
-  fetch('/ready/'+id,{method:'POST'}).then(()=>{showToast('Order marked ready!','ok');loadVendor();});
-}
-
-function loadRider(){
-  fetch('/orders').then(r=>r.json()).then(data=>{
-    const ready=data.filter(o=>o.status==='ready'||o.status==='rider assigned');
-    const done=data.filter(o=>o.status==='delivered');
-    document.getElementById('r-ready').textContent=ready.length;
-    document.getElementById('r-done').textContent=done.length;
-    const el=document.getElementById('riderOrders');
-    if(!ready.length){el.innerHTML='<div class="empty"><div class="empty-icon">🛵</div><p>No pickups yet</p></div>';return;}
-    el.innerHTML=ready.map(o=>`
-      <div class="voc voc-blue">
-        <div class="voc-top"><span class="voc-id">Order #${String(o.id).slice(-6)}</span><span class="chip sr">✅ Ready</span></div>
-        <div class="voc-food">${o.food}</div>
-        <div class="voc-addr">📍 ${o.address}</div>
-        <div class="map-mini"><div class="map-label">🛵 En route · ${o.address}</div></div>
-        ${bdown(o,true)}
-        <button class="deliver-btn" onclick="deliver(${o.id})">🎉 Mark as Delivered</button>
-      </div>`).join('');
-  });
-}
-
-function deliver(id){
-  fetch('/deliver/'+id,{method:'POST'}).then(()=>{showToast('Order delivered! 🎉','ok');loadRider();});
-}
-
-function loadAdmin(){
-  fetch('/orders').then(r=>r.json()).then(data=>{
-    document.getElementById('a-total').textContent=data.length;
-    document.getElementById('a-pending').textContent=data.filter(o=>o.status==='pending').length;
-    document.getElementById('a-ready').textContent=data.filter(o=>o.status==='ready').length;
-    document.getElementById('a-done').textContent=data.filter(o=>o.status==='delivered').length;
-    const el=document.getElementById('adminOrders');
-    if(!data.length){el.innerHTML='<div class="empty"><div class="empty-icon">📋</div><p>No orders yet</p></div>';return;}
-    const opts=RIDERS.map(r=>`<option value="${r}">${r}</option>`).join('');
-    el.innerHTML=data.slice().reverse().map(o=>`
-      <div class="voc">
-        <div class="voc-top"><span class="voc-id">Order #${String(o.id).slice(-6)}</span><span class="chip ${sc(o.status)}">${si(o.status)} ${o.status}</span></div>
-        <div class="voc-food">${o.food}</div>
-        <div class="voc-addr">📍 ${o.address}</div>
-        <div class="voc-rider">👤 ${o.rider}</div>
-        ${bdown(o,true)}
-        ${o.status==='pending'||o.status==='ready'
-          ?`<div class="assign-row"><select class="rider-sel" id="r-${o.id}"><option value="">Select rider…</option>${opts}</select><button class="assign-btn" onclick="assign(${o.id})">Assign</button></div>`
-          :o.status==='rider assigned'
-          ?`<div class="assigned-badge">🛵 Rider en route</div>`
-          :`<div class="delivered-badge">🎉 Delivered</div>`}
-      </div>`).join('');
-  });
-}
-
-function assign(id){
-  const sel=document.getElementById('r-'+id);
-  if(!sel?.value){showToast('Please select a rider first','err');return;}
-  fetch('/assign-rider/'+id,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({rider:sel.value})})
-  .then(()=>{showToast('Rider assigned! 🛵','ok');loadAdmin();});
-}
-
-function setPrice(){
-  const p=document.getElementById('priceInput').value;
-  if(!p||isNaN(p)||Number(p)<0){showToast('Enter a valid price','err');return;}
-  fetch('/set-delivery-price',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({price:Number(p)})})
-  .then(r=>r.json()).then(data=>{
-    document.getElementById('currentFee').textContent='₦'+fmt(data.price);
-    document.getElementById('priceInput').value='';
-    showToast('Fee updated to ₦'+fmt(data.price),'ok');
-  });
-}
 </script>
 
 </body>
